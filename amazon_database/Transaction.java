@@ -97,7 +97,6 @@ public class Transaction {
             }
                     
         } catch (SQLException ex) {
-            //noting
             System.out.println("Fail");
         }
         
@@ -116,7 +115,7 @@ public class Transaction {
                 result.add(map);
             }
         } catch (SQLException ex) {
-            //noting
+            //nothing
         }
         return result;
     }
