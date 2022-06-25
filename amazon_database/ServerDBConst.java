@@ -25,7 +25,13 @@ public class ServerDBConst {
         public static final String Item_ID="Item_ID";
     }
     public static class Items_COLS{
-        public static final String Name="Name";
-        public static final String Price="Price";
+      public static final String Item_ID="Item_ID";  
+      public static final String Name="Name";
+      public static final String Price="Price";
+      public static final String Amount_available="Amount_available";
+      public static final String category="category";
+      public static final String Img_URL="Img_URL";
+          
+    }
     }
 }
