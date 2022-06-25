@@ -45,7 +45,7 @@ public class Item {
       {
         try {
             //record item
-                prestatement=connection.prepareStatement("insert into items (Name,Amount_available,category,Price,Img_URL) values (?,?,?,?,?)");
+                prestatement=connection.prepareStatement("insert into item (Name,Amount_available,category,Price,Img_URL) values (?,?,?,?,?)");
                 prestatement.setString(1,Name);
                 prestatement.setString(2,Integer.toString(Amount_available));
                 prestatement.setString(3,category);
@@ -66,7 +66,7 @@ public class Item {
         
     try
     {
-        prestatement=connection.prepareStatement("select* from  items where  (Item_ID=?)");
+        prestatement=connection.prepareStatement("select* from  item where  (Item_ID=?)");
         prestatement.setInt(1, Item_ID);
         resultset=prestatement.executeQuery();
         while(resultset.next())
@@ -87,7 +87,7 @@ public void itemUpdate(int Item_ID,int Amount_available)
         
     try
     {
-        prestatement=connection.prepareStatement("UPDATE items "
+        prestatement=connection.prepareStatement("UPDATE item "
                                                                 +"SET Amount_available =(Amount_available+? )"
                                                                                                                +"WHERE Item_ID=?");
         prestatement.setString(1,  Integer.toString(Amount_available ));
@@ -113,7 +113,7 @@ public void itemUpdate(int Item_ID,int Amount_available)
         
     try 
     {
-        prestatement =connection.prepareStatement("select * from items where (Item_ID >?) and(Item_ID<=?) ");
+        prestatement =connection.prepareStatement("select * from item where (Item_ID >?) and(Item_ID<=?) ");
         prestatement.setString(1, Integer.toString(start));
         prestatement.setString(2, Integer.toString(end));
         resultset=prestatement.executeQuery();
