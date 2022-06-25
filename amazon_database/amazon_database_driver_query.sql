@@ -38,6 +38,7 @@ CREATE TABLE Holds(
     foreign key(Transaction_ID) REFERENCES Transaction(Transaction_ID),
     foreign key(Item_ID) REFERENCES Item(Item_ID),
     PRIMARY KEY(Item_ID,Transaction_ID)
+	
 );
 
 
