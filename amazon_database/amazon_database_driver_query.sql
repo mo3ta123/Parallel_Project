@@ -39,7 +39,7 @@ CREATE TABLE Holds(
     PRIMARY KEY(Item_ID,Transaction_ID)
 	
 );
-INSERT INTO items( Name, Amount_available, category, Img_URL, Price) VALUES 
+INSERT INTO item( Name, Amount_available, category, Img_URL, Price) VALUES 
 ('Camera',20,'Electronics','https://egyptlaptop.com/images/detailed/31/1594281073_IMG_1384580.jpg',5000),
 ('Phone',10,'Electronics','https://media.4rgos.it/i/Argos/9520608_R_Z001A?w=750&h=440&qlt=70',6000),
 ('Washing Machine',5,'Electronics','https://cairocart.com/pub/media/catalog/product/cache/f65e4f3f0d55f7c692e033a9434b3a7f/h/o/hoover-washing-machine-fully-automatic-7-kg-in-black-color-dxoc17c3b-ela-zoom.jpg',12000),
