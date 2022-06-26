@@ -17,20 +17,14 @@ import java.util.HashMap;
  */
 public class Transaction {
     
-    Connection connection;
-    PreparedStatement prestatement;
-    ResultSet resultset;
-    public boolean connect(){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection("jdbc:mysql://localhost/Amazon","root","");
-            return true;
-        } catch (Exception ex) {
-            System.out.println("something is worng");
-            return false;
-        }
-    }
-    public void transaction_input(int user_ID,int money_amount,String transaction_type,Vector<HashMap<String,String>>items_id){
+       Connection connection;
+       PreparedStatement prestatement;
+       ResultSet resultset;
+      
+       public Transaction(Connection connection){
+           this.connection=connection;
+       }
+    public void transaction_input(int user_ID,int money_amount,String transaction_type,Vector<HashMap<String,String>> items_id){
         try {
            /* prestatement =connection.prepareStatement("select * from User");
             resultset=prestatement.executeQuery();
@@ -97,6 +91,7 @@ public class Transaction {
             }
                     
         } catch (SQLException ex) {
+            //noting
             System.out.println("Fail");
         }
         
@@ -108,6 +103,7 @@ public class Transaction {
             resultset=prestatement.executeQuery();
             while(resultset.next()){
                 HashMap<String,String>map=new HashMap<String,String>();
+                map.put(Transaction_COLS.Transaction_ID, resultset.getString(Transaction_COLS.Transaction_ID));
                 map.put(Transaction_COLS.User_ID, resultset.getString(Transaction_COLS.User_ID));
                 map.put(Transaction_COLS.Transaction_date, resultset.getString(Transaction_COLS.Transaction_date));
                 map.put(Transaction_COLS.Transaction_type, resultset.getString(Transaction_COLS.Transaction_type));
@@ -115,14 +111,14 @@ public class Transaction {
                 result.add(map);
             }
         } catch (SQLException ex) {
-            //nothing
+            //noting
         }
         return result;
     }
     public Vector<HashMap<String,String>> items_bought_list(int client_id){
         Vector<HashMap<String,String>> result=new Vector<>();
         try {
-            prestatement =connection.prepareStatement("select i.name,i.price,t.Transaction_date,h.amount \n" +
+            prestatement =connection.prepareStatement("select i.item_id ,i.name,i.price,t.Transaction_date,h.amount \n" +
                                                         "from item as i,transaction as t,holds as h\n" +
                                                         "where i.item_id=h.item_id and t.user_id=? and t.Transaction_ID = h.Transaction_ID\n" +
                                                         "order by t.Transaction_date desc;");
@@ -130,6 +126,7 @@ public class Transaction {
             resultset=prestatement.executeQuery();
             while(resultset.next()){
                 HashMap<String,String>map=new HashMap<String,String>();
+                map.put(Items_COLS.Item_ID, resultset.getString(Items_COLS.Item_ID));
                 map.put(Items_COLS.Name, resultset.getString(Items_COLS.Name));
                 map.put(Items_COLS.Price, resultset.getString(Items_COLS.Price));
                 map.put(Transaction_COLS.Transaction_date, resultset.getString(Transaction_COLS.Transaction_date));
@@ -141,14 +138,5 @@ public class Transaction {
         }
         return result;
     }
-    public static void main(String [] args){
-        Transaction t=new Transaction();
-        t.connect();
-        Vector<HashMap<String,String>> items=t.items_bought_list(2);
-        for (int i=0;i<items.size();i++)
-        {
-         System.out.println(items.get(i).get(Items_COLS.Name)+"\t"+items.get(i).get(Items_COLS.Price)+"\t"+items.get(i).get(Transaction_COLS.Transaction_date)+"\t"+items.get(i).get(Holds_COLS.Amount));
-        }
-        
-    }
+ 
 }
