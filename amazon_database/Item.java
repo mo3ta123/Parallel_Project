@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-
 import java.util.Vector;
 import amazon_database.ServerDBConst.*;
 import java.util.HashMap;
@@ -18,27 +17,13 @@ import java.util.HashMap;
 public class Item {
 
    
-        
+       Connection connection;
+       PreparedStatement prestatement;
+       ResultSet resultset;
       
-    Connection connection;
-    PreparedStatement prestatement;
-    ResultSet resultset;
-    public boolean connect(){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection("jdbc:mysql://localhost/amazon","root","");
-              return true;
-        }
-            
-    catch (ClassNotFoundException ex){
-        java.util.logging.Logger.getLogger(Item.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
-        return false;
-    }
-     catch (SQLException ex){
-        java.util.logging.Logger.getLogger(Item.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
-         return false;
-    }
-}
+       public Item(Connection connection){
+           this.connection=connection;
+       }
 
         
       public void itemInsert(int Item_ID,String Name,int Amount_available,String category,int Price,String Img_URL)
@@ -92,8 +77,7 @@ public class Item {
 }   
  
      
-   
-}
+
 public void itemUpdate(int Item_ID,int Amount_available)
 {
         
@@ -152,20 +136,5 @@ public void itemUpdate(int Item_ID,int Amount_available)
 
  
  
- public static void main(String args[])  //static method  
-{  
-Item item=new Item();
-item.connect();
-//item.itemUpdate(3,3);
- Vector<HashMap<String,String>> items=item.item_home_view(1);
-    
-        Vector<HashMap<String,String>> items=item.itemView(10);
-      
-        for (int i=0;i<items.size();i++)
-        {
-           
-         System.out.println(items.get(i).get(Items_COLS.Name)+"\t"+items.get(i).get(Items_COLS.category)+"\t"+items.get(i).get(Items_COLS.Price)+"\t"+items.get(i).get(Items_COLS.Item_ID));
-        }
-}  
+ 
 }
-
