@@ -50,6 +50,7 @@ public class User {
             resultset = prestatement.executeQuery();
             if(resultset.next()){
                 HashMap<String, String> map = new HashMap<String, String>();
+                map.put(User_COLS.USER_ID, resultset.getString(User_COLS.USER_ID));
                 result.add(map);
                 return result;
             }
