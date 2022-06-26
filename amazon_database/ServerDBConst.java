@@ -8,6 +8,13 @@ public class ServerDBConst {
         public static  final String ADMIN="admin"; 
         public static final String ClIENT="client";
     }
+    public static class User_COLS{
+        public static final String USER_NAME = "Name";
+        public static final String USER_ID = "User_ID";
+        public static final String USER_PASS = "Password";
+        public static final String USER_BAL = "Balance";
+        public static final String USER_PHONE = "Phone";
+    }
     public static class Transaction_type{
         public static final String BUY="Buy";
         public static final String DEPOSIT="Deposit";
