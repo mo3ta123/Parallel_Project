@@ -67,4 +67,36 @@ public Vector<HashMap<String,String>> databaseRequestHandler(Vector<HashMap<Stri
                 return null;
             case Request_Config.item_home_view:
                 return item.item_home_view(Integer.parseInt(request.get(0).get(Items_COLS.item_page)));
-                
+            //user
+            case Request_Config.insert_user:
+                return user.insert_user(request.get(0).get(User_COLS.USER_NAME),
+                                 request.get(0).get(User_COLS.USER_PASS),
+                                 Integer.parseInt(request.get(0).get(User_COLS.USER_BAL)),
+                                 request.get(0).get(User_COLS.USER_PHONE),
+                                 request.get(0).get(User_COLS.USER_TYPE));
+            case Request_Config.update_user:
+                user.update_user(Integer.parseInt(request.get(0).get(User_COLS.USER_ID)),
+                        request.get(0).get(User_COLS.USER_NAME),
+                        request.get(0).get(User_COLS.USER_PASS),
+                        Integer.parseInt(request.get(0).get(User_COLS.USER_BAL)),
+                        request.get(0).get(User_COLS.USER_PHONE));
+                return null;
+            case Request_Config.checkLogin:
+                return user.checkLogin(request.get(0).get(User_COLS.USER_NAME), request.get(0).get(User_COLS.USER_PASS));
+            case Request_Config.output_user_ALL:
+                return user.output_user();
+            case Request_Config.output_user:
+                return user.output_user(Integer.parseInt(request.get(0).get(User_COLS.USER_ID)));
+            default:
+                return null;
+        }
+    }
+    private void transaction_input_handler(Vector<HashMap<String,String>> request){
+        HashMap<String,String> options=request.get(0);
+        request.remove(0);
+        transaction.transaction_input(Integer.parseInt(options.get(Transaction_COLS.User_ID)),
+                                      Integer.parseInt(options.get(Transaction_COLS.money_Amount)), 
+                                                        options.get(Transaction_COLS.Transaction_type)
+                                                         ,request);
+
+    }
