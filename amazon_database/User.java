@@ -33,7 +33,7 @@ public class User {
             return false;
         }
     }
-    public void insert_user(String u_Name, String u_Password, int u_Balance, String u_Phone, String u_Type){
+    public int insert_user(String u_Name, String u_Password, int u_Balance, String u_Phone, String u_Type){
         try{
             //Preparing 
             prestatement=connection.prepareStatement("INSERT INTO User(Name,Password,Balance,Phone,User_type) VALUES(?,?,?,?,?)");
@@ -43,10 +43,18 @@ public class User {
             prestatement.setString(4, u_Phone);
             prestatement.setString(5, u_Type);
             prestatement.executeUpdate();
+            prestatement = connection.prepareStatement("SELECT User_ID FROM USER WHERE Name = ? AND PASSWORD = ?");
+            prestatement.setString(1, u_Name);
+            prestatement.setString(2, u_Password);
+            resultset = prestatement.executeQuery();
+            if(resultset.next()){
+                return resultset.getInt(User_COLS.USER_ID);
+            }
         }
         catch(SQLException ex){
             System.out.println("ERROR: Insert Failure");
         }
+        return -1;
     }
     public void update_user(int u_ID, String u_Name, String u_Password, int u_Balance, String u_Phone){ //INSERTING AN EMPTY STRING WILL RESULT IN NO CHANGE
         try{
@@ -72,6 +80,20 @@ public class User {
             System.out.println("ERROR: Insert Failure");
         }
     }
+    public int checkLogin(String u_Name, String u_Password){
+        try{
+            prestatement = connection.prepareStatement("SELECT User_ID FROM USER WHERE Name = ? AND Password = ?");
+            prestatement.setString(1, u_Name);
+            prestatement.setString(2, u_Password);
+            resultset = prestatement.executeQuery();
+            if(resultset.next())
+                return resultset.getInt(User_COLS.USER_ID);
+        }
+        catch(SQLException ex){
+            //nothinng
+        }
+        return -1;
+    }
     public Vector<HashMap<String,String>> output_user(){
             Vector<HashMap<String,String>> result=new Vector<>();
             try{
@@ -91,6 +113,26 @@ public class User {
                 //nothinng
             }
             return result;
+    }
+    public HashMap<String,String> output_user(int u_ID){
+        HashMap<String, String> map = new HashMap<String, String>();
+        try{
+            prestatement = connection.prepareStatement("SELECT * FROM User WHERE User_ID = ?");
+            prestatement.setString(1, Integer.toString(u_ID));
+            resultset = prestatement.executeQuery();
+            if(resultset.next()){
+                map.put(User_COLS.USER_ID, resultset.getString(User_COLS.USER_ID));
+                map.put(User_COLS.USER_BAL, resultset.getString(User_COLS.USER_BAL));
+                map.put(User_COLS.USER_NAME, resultset.getString(User_COLS.USER_NAME));
+                map.put(User_COLS.USER_PASS, resultset.getString(User_COLS.USER_PASS));
+                map.put(User_COLS.USER_PHONE, resultset.getString(User_COLS.USER_PHONE));
+                return map;
+            }
+        }
+        catch(SQLException ex){
+            //noting
+        }
+        return map;
     }
 }
     
