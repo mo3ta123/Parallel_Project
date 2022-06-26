@@ -38,3 +38,33 @@ public class DataBase {
         user=new User(connection);
     }
 }
+public Vector<HashMap<String,String>> databaseRequestHandler(Vector<HashMap<String,String>> request){
+        String function=request.get(0).get(Request_Config.Config_key);
+        switch(function){
+            //transaction
+            case Request_Config.transaction_input:
+                transaction_input_handler(request);
+                return null;
+            case Request_Config.transaction_output:
+                return transaction.transaction_output();
+            case Request_Config.items_bought_list:
+                return transaction.items_bought_list(Integer.parseInt(request.get(0).get(Transaction_COLS.User_ID)));
+            //items
+                
+            case Request_Config.itemInsert:
+                item.itemInsert(Integer.parseInt(request.get(0).get(Items_COLS.Item_ID)),
+                                request.get(0).get(Items_COLS.Name),
+                                Integer.parseInt(request.get(0).get(Items_COLS.Amount_available)),
+                                request.get(0).get(Items_COLS.category),
+                                Integer.parseInt(request.get(0).get(Items_COLS.Price)),
+                                request.get(0).get(Items_COLS.Img_URL));
+                return null;
+            case Request_Config.itemView:
+                return item.itemView(Integer.parseInt(Items_COLS.Item_ID));
+            case Request_Config.itemUpdate:
+                item.itemUpdate(Integer.parseInt(request.get(0).get(Items_COLS.Item_ID)),
+                                Integer.parseInt(request.get(0).get(Items_COLS.Amount_available)));
+                return null;
+            case Request_Config.item_home_view:
+                return item.item_home_view(Integer.parseInt(request.get(0).get(Items_COLS.item_page)));
+                
