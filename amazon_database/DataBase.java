@@ -31,4 +31,10 @@ public class DataBase {
          return false;
     }
     }
+    public DataBase(){
+        connect();
+        transaction = new Transaction(connection);
+        item =new Item(connection);
+        user=new User(connection);
+    }
 }
