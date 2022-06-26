@@ -1,3 +1,4 @@
+
 package amazon_database;
 
 import java.sql.Connection;
@@ -31,14 +32,14 @@ public class DataBase {
          return false;
     }
     }
+    
     public DataBase(){
         connect();
         transaction = new Transaction(connection);
         item =new Item(connection);
         user=new User(connection);
     }
-}
-public Vector<HashMap<String,String>> databaseRequestHandler(Vector<HashMap<String,String>> request){
+    public Vector<HashMap<String,String>> databaseRequestHandler(Vector<HashMap<String,String>> request){
         String function=request.get(0).get(Request_Config.Config_key);
         switch(function){
             //transaction
@@ -67,6 +68,7 @@ public Vector<HashMap<String,String>> databaseRequestHandler(Vector<HashMap<Stri
                 return null;
             case Request_Config.item_home_view:
                 return item.item_home_view(Integer.parseInt(request.get(0).get(Items_COLS.item_page)));
+                
             //user
             case Request_Config.insert_user:
                 return user.insert_user(request.get(0).get(User_COLS.USER_NAME),
@@ -100,3 +102,35 @@ public Vector<HashMap<String,String>> databaseRequestHandler(Vector<HashMap<Stri
                                                          ,request);
 
     }
+    
+//    public static void main(String args[])  //static method  
+//{  
+//        DataBase db=new DataBase();
+    //item.itemInsert(3, "cameraame", 10, "electronics", "very smart camera", "https");
+    //item.itemUpdate(3,3);
+//        Vector<HashMap<String,String>>request=new Vector<>();
+//        HashMap<String,String>map=new HashMap<>();
+ //       map.put(Request_Config.Config_key, Request_Config.transaction_input);
+   //     map.put(Transaction_COLS.User_ID,"1");
+     //   request.add(map);
+       // 
+        //request=db.databaseRequestHandler(request);
+        //
+        //
+        //
+        //Vector<HashMap<String,String>> items=db.item.item_home_view(1);
+        //System.out.println(items.size());
+        //for (int i=0;i<items.size();i++)
+        //{
+          // 
+         //System.out.println(items.get(i).get(ServerDBConst.Items_COLS.Name)+"\t"+items.get(i).get(ServerDBConst.Items_COLS.Price)+"\t"+items.get(i).get(ServerDBConst.Items_COLS.Item_ID));
+        //}
+        //items=db.transaction.items_bought_list(2);
+        //for (int i=0;i<items.size();i++)
+        //{
+         //System.out.println(items.get(i).get(ServerDBConst.Items_COLS.Name)+"\t"+items.get(i).get(ServerDBConst.Items_COLS.Price)+"\t"+items.get(i).get(ServerDBConst.Transaction_COLS.Transaction_date)+"\t"+items.get(i).get(ServerDBConst.Holds_COLS.Amount));
+    //}
+        
+//}  
+    
+}
