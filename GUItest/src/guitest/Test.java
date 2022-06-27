@@ -1,21 +1,87 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package guitest;
+import guitest.ServerConst.Items_COLS;
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Vector;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 import org.xml.sax.Attributes;
+
 /**
  *
  * @author Youssef
  */
-public class Test extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Test
-     */
+/*class Client
+{
+    public Vector<HashMap<String,String>> getInitialItems()
+    {
+        return null; 
+    }
+
+}*/
+
+
+public class Test extends javax.swing.JFrame {
+    DefaultTableModel D1;
+    public void dummy(){
+            D1 = (DefaultTableModel)HomeTable.getModel();
+    D1.setRowCount(0);
+    Vector v1 = new Vector();
+    Vector v2 = new Vector();
+    v2.add("Mobile");
+    v2.add("Electornics");
+    v2.add("3");
+    v2.add("9000");
+
+    D1.addRow(v2);
+
+v1.add("Toy");
+v1.add("Toys");
+v1.add("5");
+v1.add("300");
+
+D1.addRow(v1);
+
+}
+
+    /*public void populateJTable()
+    {
+        Client obj = new Client();
+        Vector<HashMap<String,String>> vec = obj.getInitialItems();
+        String[] columnName = {"Id","Name","Amount_available","Categorie", "Price","Image"};
+        Object[][] rows = new Object[vec.size()][6];
+        for(int i = 0 ; i < vec.size() ; i++)
+        {
+            rows[i][0] = vec.get(i).get(Items_COLS.Item_ID);
+            rows[i][1] = vec.get(i).get(Items_COLS.Name);
+            rows[i][2] = vec.get(i).get(Items_COLS.Amount_available);
+            rows[i][4] = vec.get(i).get(Items_COLS.Price);
+            
+            if(vec.get(i).get(Items_COLS.Img_URL) != null){
+                
+             ImageIcon image = new ImageIcon(new ImageIcon(vec.get(i).get(Items_COLS.Img_URL)).getImage()
+             .getScaledInstance(150, 120, Image.SCALE_SMOOTH) );   
+                
+            rows[i][5] = image;
+            }
+            else{
+                rows[i][5] = null;
+            }
+            rows[i][3] = vec.get(i).get(Items_COLS.category);
+        }
+        
+        MyModel model = new MyModel(rows, columnName);
+        
+        HomeTable.setModel(model);
+        HomeTable.setRowHeight(120);
+        HomeTable.getColumnModel().getColumn(5).setPreferredWidth(150);
+    }*/
+    
     public Test() {
         initComponents();
+        //populateJTable();
         HomePanel.setVisible(false);
     }
 
@@ -49,6 +115,7 @@ public class Test extends javax.swing.JFrame {
         HomePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         HomeTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -236,49 +303,72 @@ public class Test extends javax.swing.JFrame {
 
         getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 600));
 
+        HomePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane1.setAutoscrolls(true);
+
+        HomeTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         HomeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Quantity", "Category", "Price", "Image", "Add Item"
+                "ID", "Name", "Amount", "category", "Price"
             }
-        ));
-        HomeTable.setName(""); // NOI18N
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        HomeTable.setRowHeight(30);
+        HomeTable.setShowGrid(true);
+        HomeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomeTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(HomeTable);
 
-        javax.swing.GroupLayout HomePanelLayout = new javax.swing.GroupLayout(HomePanel);
-        HomePanel.setLayout(HomePanelLayout);
-        HomePanelLayout.setHorizontalGroup(
-            HomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        HomePanelLayout.setVerticalGroup(
-            HomePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
-        );
+        HomePanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 137, 690, 310));
 
-        getContentPane().add(HomePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 570, 590));
+        jButton1.setText("Add to Cart");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        HomePanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 120, 40));
+
+        getContentPane().add(HomePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-    HomePanel.setVisible(true);        // TODO add your handling code here:
+    HomePanel.setVisible(true); 
+    dummy();// TODO add your handling code here:
 
        
     }//GEN-LAST:event_jPanel6MouseClicked
@@ -288,8 +378,27 @@ public class Test extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
-        // TODO add your handling code here:
+        // TODO add your handling code here
     }//GEN-LAST:event_jPanel6MousePressed
+
+    private void HomeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeTableMouseClicked
+        D1 = (DefaultTableModel)HomeTable.getModel();
+        int index = HomeTable.getSelectedRow();  // TODO add your handling code here:
+    }//GEN-LAST:event_HomeTableMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        D1 = (DefaultTableModel)HomeTable.getModel();
+        int index = HomeTable.getSelectedRow();
+        Vector v = new Vector();
+        v.add(D1.getValueAt(index, 0)); 
+        v.add(D1.getValueAt(index, 1));
+        v.add(D1.getValueAt(index, 2));
+        v.add(D1.getValueAt(index, 3));// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -320,6 +429,7 @@ public class Test extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Test().setVisible(true);
             }
@@ -329,6 +439,7 @@ public class Test extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HomePanel;
     private javax.swing.JTable HomeTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

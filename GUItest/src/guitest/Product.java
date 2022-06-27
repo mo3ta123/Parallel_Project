@@ -5,19 +5,32 @@ package guitest;
  */
 public class Product 
 {
+    private int Id;
     private String name;
-    private int qte;
+    private int Amount_available;
     private String price;
     private byte[] Image;
     
+    
     public Product(){}
     
-    public Product(String Name, int Qte, String Price,byte[] image)
+    public Product(int Id, String Name, int Amount_available, String Price, byte[] image)
     {
+        this.Id   = Id;
         this.name = Name;
-        this.qte = Qte;
+        this.Amount_available = Amount_available;
         this.price = Price;
         this.Image = image;    
+    }
+    
+    public int getId()
+    {
+        return Id;
+    }
+    
+    public void setId(int Id)
+    {
+        this.Id = Id;
     }
     
     public String getName()
@@ -30,14 +43,14 @@ public class Product
         this.name = Name;
     }
     
-    public int getQte()
+    public int getAmount_available()
     {
-        return qte;
+        return Amount_available;
     }
     
-    public void setQte(int Qte)
+    public void setAmount_available(int Qte)
     {
-        this.qte = Qte;
+        this.Amount_available = Qte;
     }
     
     public String getPrice()
