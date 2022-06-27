@@ -27,7 +27,9 @@ public class Test extends javax.swing.JFrame {
     DefaultTableModel D1;
     DefaultTableModel cart_table;
    
-        public void dummy2(){
+    
+    
+    public void dummy2(){
     cart_table = (DefaultTableModel)carttable.getModel();
     cart_table.setRowCount(0);
     Vector v1 = new Vector();
@@ -54,16 +56,17 @@ public class Test extends javax.swing.JFrame {
     D1.setRowCount(0);
     Vector v1 = new Vector();
     Vector v2 = new Vector();
+    v2.add("3432");
     v2.add("Mobile");
-    v2.add("Electornics");
     v2.add("3");
+    v2.add("Electronics");
     v2.add("9000");
 
     D1.addRow(v2);
-
+v1.add("3932");
 v1.add("Toy");
-v1.add("Toys");
 v1.add("5");
+v1.add("Toys");
 v1.add("300");
 
 D1.addRow(v1);
@@ -142,7 +145,7 @@ D1.addRow(v1);
         HomePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         HomeTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        addtocartbtn = new javax.swing.JButton();
         cartpanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -398,18 +401,18 @@ D1.addRow(v1);
 
         HomePanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 137, 690, 310));
 
-        jButton1.setText("Add to Cart");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        addtocartbtn.setText("Add to Cart");
+        addtocartbtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                addtocartbtnMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addtocartbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addtocartbtnActionPerformed(evt);
             }
         });
-        HomePanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 120, 40));
+        HomePanel.add(addtocartbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 120, 40));
 
         getContentPane().add(HomePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 590));
 
@@ -441,7 +444,7 @@ D1.addRow(v1);
 
             },
             new String [] {
-                "Name", "Category", "Quantity", "Price"
+                "ID", "Name", "Amout", "Category", "Price"
             }
         ));
         carttable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -575,20 +578,26 @@ D1.addRow(v1);
         D1 = (DefaultTableModel)HomeTable.getModel();
         int index = HomeTable.getSelectedRow();  // TODO add your handling code here:
     }//GEN-LAST:event_HomeTableMouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    public void loadtocart(Vector v){
+    cart_table = (DefaultTableModel)carttable.getModel();
+    cart_table.addRow(v);
+    }
+    private void addtocartbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtocartbtnActionPerformed
+        Vector global = new Vector();
         D1 = (DefaultTableModel)HomeTable.getModel();
         int index = HomeTable.getSelectedRow();
-        Vector v = new Vector();
-        v.add(D1.getValueAt(index, 0)); 
-        v.add(D1.getValueAt(index, 1));
-        v.add(D1.getValueAt(index, 2));
-        v.add(D1.getValueAt(index, 3));// TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        global.add(D1.getValueAt(index, 0).toString()); 
+        global.add(D1.getValueAt(index, 1).toString());
+        global.add(D1.getValueAt(index, 2).toString());
+        global.add(D1.getValueAt(index, 3).toString());
+        global.add(D1.getValueAt(index, 4).toString());// TODO add your handling code here:
+        
+        loadtocart(global);
+    }//GEN-LAST:event_addtocartbtnActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void addtocartbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addtocartbtnMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_addtocartbtnMouseClicked
 
     private void carttableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carttableMouseClicked
         cart_table = (DefaultTableModel)carttable.getModel();      // TODO add your handling code here:
@@ -615,7 +624,7 @@ D1.addRow(v1);
                orderhistorypanel.setVisible(false);   
 
        cartpanel.setVisible(true);
-       dummy2();
+       //dummy2();
        deletebtn.setEnabled(false);
 // TODO add your handling code here:
     }//GEN-LAST:event_jPanel3MouseClicked
@@ -665,10 +674,10 @@ D1.addRow(v1);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HomePanel;
     private javax.swing.JTable HomeTable;
+    private javax.swing.JButton addtocartbtn;
     private javax.swing.JPanel cartpanel;
     private javax.swing.JTable carttable;
     private javax.swing.JButton deletebtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
