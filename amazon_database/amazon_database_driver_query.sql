@@ -1,13 +1,14 @@
+drop database amazon;
 create database Amazon;
 use Amazon;
 create table User(
-	User_ID INTEGER NOT NULL auto_increment,
+	Name  VARCHAR(30) NOT NULL,
     Phone VARCHAR(12),
-    Name  VARCHAR(30) NOT NULL,
+    email varchar (40),
     Password VARCHAR(20) NOT NULL,
     Balance INTEGER default 0,
     User_type enum('admin','client'),
-    primary key (User_ID)
+    primary key (Name)
 );
 
 CREATE TABLE Item(
@@ -25,9 +26,9 @@ CREATE TABLE Transaction(
     money_Amount INTEGER default 0,
     Transaction_type ENUM('Buy','Deposit') NOT NULL,
     Transaction_date DATETIME,
-    User_ID INTEGER NOT NULL,
+    User_Name varchar(30) NOT NULL,
     primary key(Transaction_ID),
-    FOREIGN KEY(User_ID) REFERENCES User(User_ID)
+    FOREIGN KEY(User_Name) REFERENCES User(name)
 );
 
 CREATE TABLE Holds(
@@ -39,6 +40,16 @@ CREATE TABLE Holds(
     PRIMARY KEY(Item_ID,Transaction_ID)
 	
 );
+
+CREATE TABLE cart(
+	user_name varchar(30) not null,
+    item_id integer not null,
+    Amount INTEGER NOT NULL,
+    foreign key (user_name) references User(name),
+    foreign key(item_id) references item(item_id)
+);
+
+
 INSERT INTO item( Name, Amount_available, category, Img_URL, Price) VALUES 
 ('Camera',20,'Electronics','https://egyptlaptop.com/images/detailed/31/1594281073_IMG_1384580.jpg',5000),
 ('Phone',10,'Electronics','https://media.4rgos.it/i/Argos/9520608_R_Z001A?w=750&h=440&qlt=70',6000),
@@ -55,6 +66,4 @@ INSERT INTO item( Name, Amount_available, category, Img_URL, Price) VALUES
 ("Stark Kettlebell, 24 kg",32,'GYM','https://student.valuxapps.com/storage/uploads/products/161545152160GOl.item_XXL_39275650_152762070.jpeg',1080),
 ("Mask to protect the face, 50 pieces",40,"Health","https://student.valuxapps.com/storage/uploads/products/1638734223uyATp.1.jpg	",45),
 ("Xiaomi Redmi 10 Dual SIM Mobile Phone",23,"Electronics","https://student.valuxapps.com/storage/uploads/products/1638734961565J3.11.jpg",3075),
-("Avony Medical Mask","Health","https://student.valuxapps.com/storage/uploads/products/1638734575kfKn8.21.jpg",28);
-
-
+("Avony Medical Mask",12,"Health","https://student.valuxapps.com/storage/uploads/products/1638734575kfKn8.21.jpg",28);
