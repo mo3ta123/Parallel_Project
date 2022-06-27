@@ -46,6 +46,15 @@ INSERT INTO item( Name, Amount_available, category, Img_URL, Price) VALUES
 ('Phone',10,'Electronics','https://media.4rgos.it/i/Argos/9520608_R_Z001A?w=750&h=440&qlt=70',6000),
 ('Fridge',4,'Electronics','https://cdn.shopify.com/s/files/1/0024/9803/5810/products/523200-Product-0-I-637741141959068251_800x800.jpg?v=1638477869',20000),
 ('Laptop',2,'Electronics','https://m.media-amazon.com/images/I/718ETwvLVOL._SL1500_.jpg',16000),
-('PlayStation',3,'Electronics','https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21',16000);
+('PlayStation',3,'Electronics','https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21',16000),
+('Apple iPhone 12 Pro Max - 256GB, Blue',5,'Electronics','https:\/\/student.valuxapps.com\/storage\/uploads\/products\/1615440322npwmU.71DVgBTdyLL._SL1500_.jpg',25000),
+('JBL JBLXTREME2BLUAM Extreme 2 Waterproof ',12,'Electronics',"https:\/\/student.valuxapps.com\/storage\/uploads\/products\/1615440689wYMHV.item_XXL_36330138_142814934.jpeg",5599),
+('Samsung 65 Inch 4K Ultra HD Smart Curved TV',5,'Electronics','https:\/\/student.valuxapps.com\/storage\/uploads\/products\/1615441020ydvqD.item_XXL_51889566_32a329591e022.jpeg',11499),
+('Nikon FX-format D750 - 24.3 Megapixel',3,'Electronics','https:\/\/student.valuxapps.com\/storage\/uploads\/products\/1615450256e0bZk.item_XXL_7582156_7501823.jpeg',32860),
+("Kingston 2.5 inch 240 GB",12,'Electronics',"https://student.valuxapps.com/storage/uploads/products/1615451352LMOAF.item_XXL_23705724_34135503.jpeg",530),
+("Stark Kettlebell, 24 kg",32,'GYM','https://student.valuxapps.com/storage/uploads/products/161545152160GOl.item_XXL_39275650_152762070.jpeg',1080),
+("Mask to protect the face, 50 pieces",40,"Health","https://student.valuxapps.com/storage/uploads/products/1638734223uyATp.1.jpg	",45),
+("Xiaomi Redmi 10 Dual SIM Mobile Phone",23,"Electronics","https://student.valuxapps.com/storage/uploads/products/1638734961565J3.11.jpg",3075),
+("Avony Medical Mask","Health","https://student.valuxapps.com/storage/uploads/products/1638734575kfKn8.21.jpg",28);
 
 
