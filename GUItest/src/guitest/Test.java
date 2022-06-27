@@ -16,6 +16,7 @@ public class Test extends javax.swing.JFrame {
      */
     public Test() {
         initComponents();
+        test.setVisible(false);
     }
 
     /**
@@ -34,8 +35,8 @@ public class Test extends javax.swing.JFrame {
         testlabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        testlabel = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        testlabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -46,6 +47,7 @@ public class Test extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        test = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,8 +57,9 @@ public class Test extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-market-64.png"))); // NOI18N
         jLabel9.setText("Amazon");
-        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, 60));
+        jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 60));
 
         jSeparator1.setPreferredSize(new java.awt.Dimension(60, 10));
         jPanel7.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 230, 10));
@@ -69,6 +72,7 @@ public class Test extends javax.swing.JFrame {
         });
 
         testlabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        testlabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-home-20.png"))); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -97,12 +101,18 @@ public class Test extends javax.swing.JFrame {
         jPanel7.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 290, 40));
 
         jPanel5.setBackground(new java.awt.Color(85, 85, 118));
-
-        testlabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Search");
+
+        testlabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        testlabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-add-shopping-cart-20.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -110,17 +120,18 @@ public class Test extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(testlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(testlabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(testlabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(testlabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -129,6 +140,7 @@ public class Test extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(85, 85, 118));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-add-shopping-cart-20.png"))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -159,6 +171,7 @@ public class Test extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(85, 85, 118));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-order-history-20.png"))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -189,6 +202,7 @@ public class Test extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(85, 85, 118));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-logout-20.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -233,14 +247,21 @@ public class Test extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 90, 700, -1));
 
+        test.setText("Home Page Pressed");
+        getContentPane().add(test, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
-        // TODO add your handling code here:
+    test.setVisible(true);        // TODO add your handling code here:
 
        
     }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+test.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -295,7 +316,8 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel testlabel;
+    private javax.swing.JLabel test;
     private javax.swing.JLabel testlabel1;
+    private javax.swing.JLabel testlabel2;
     // End of variables declaration//GEN-END:variables
 }
