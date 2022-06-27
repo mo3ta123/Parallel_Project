@@ -33,7 +33,8 @@ public class User {
             return false;
         }
     }
-    public void insert_user(String u_Name, String u_Password, int u_Balance, String u_Phone, String u_Type){
+    public Vector<HashMap<String, String>> insert_user(String u_Name, String u_Password, int u_Balance, String u_Phone, String u_Type){
+        Vector<HashMap<String, String>> result = new Vector<>();
         try{
             //Preparing 
             prestatement=connection.prepareStatement("INSERT INTO User(Name,Password,Balance,Phone,User_type) VALUES(?,?,?,?,?)");
@@ -43,10 +44,21 @@ public class User {
             prestatement.setString(4, u_Phone);
             prestatement.setString(5, u_Type);
             prestatement.executeUpdate();
+            prestatement = connection.prepareStatement("SELECT User_ID FROM USER WHERE Name = ? AND PASSWORD = ?");
+            prestatement.setString(1, u_Name);
+            prestatement.setString(2, u_Password);
+            resultset = prestatement.executeQuery();
+            if(resultset.next()){
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put(User_COLS.USER_ID, resultset.getString(User_COLS.USER_ID));
+                result.add(map);
+                return result;
+            }
         }
         catch(SQLException ex){
             System.out.println("ERROR: Insert Failure");
         }
+        return result;
     }
     public void update_user(int u_ID, String u_Name, String u_Password, int u_Balance, String u_Phone){ //INSERTING AN EMPTY STRING WILL RESULT IN NO CHANGE
         try{
@@ -72,6 +84,25 @@ public class User {
             System.out.println("ERROR: Insert Failure");
         }
     }
+    public Vector<HashMap<String,String>> checkLogin(String u_Name, String u_Password){
+        Vector<HashMap<String,String>> result = new Vector<>();
+        try{
+            prestatement = connection.prepareStatement("SELECT User_ID FROM USER WHERE Name = ? AND Password = ?");
+            prestatement.setString(1, u_Name);
+            prestatement.setString(2, u_Password);
+            resultset = prestatement.executeQuery();
+            if(resultset.next()){
+                HashMap<String, String> map = new HashMap<String, String>();
+               map.put(User_COLS.USER_ID, resultset.getString(User_COLS.USER_ID));
+               result.add(map);
+            }
+            return result;
+        }
+        catch(SQLException ex){
+            //nothinng
+        }
+        return result;
+    }
     public Vector<HashMap<String,String>> output_user(){
             Vector<HashMap<String,String>> result=new Vector<>();
             try{
@@ -84,6 +115,7 @@ public class User {
                     map.put(User_COLS.USER_NAME, resultset.getString(User_COLS.USER_NAME));
                     map.put(User_COLS.USER_PASS, resultset.getString(User_COLS.USER_PASS));
                     map.put(User_COLS.USER_PHONE, resultset.getString(User_COLS.USER_PHONE));
+                    map.put(User_COLS.USER_TYPE, resultset.getString(User_COLS.USER_TYPE));
                     result.add(map);
                 }
             }
@@ -91,6 +123,29 @@ public class User {
                 //nothinng
             }
             return result;
+    }
+    public Vector<HashMap<String,String>> output_user(int u_ID){
+        Vector<HashMap<String,String>> result=new Vector<>();
+        try{
+            prestatement = connection.prepareStatement("SELECT * FROM User WHERE User_ID = ?");
+            prestatement.setString(1, Integer.toString(u_ID));
+            resultset = prestatement.executeQuery();
+            if(resultset.next()){
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put(User_COLS.USER_ID, resultset.getString(User_COLS.USER_ID));
+                map.put(User_COLS.USER_BAL, resultset.getString(User_COLS.USER_BAL));
+                map.put(User_COLS.USER_NAME, resultset.getString(User_COLS.USER_NAME));
+                map.put(User_COLS.USER_PASS, resultset.getString(User_COLS.USER_PASS));
+                map.put(User_COLS.USER_PHONE, resultset.getString(User_COLS.USER_PHONE));
+                map.put(User_COLS.USER_TYPE, resultset.getString(User_COLS.USER_TYPE));
+                result.add(map);
+            }
+            return result;
+        }
+        catch(SQLException ex){
+            //noting
+        }
+        return result;
     }
 }
     
