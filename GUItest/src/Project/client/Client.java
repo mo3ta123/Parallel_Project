@@ -15,13 +15,13 @@ public class Client {
     public boolean login(String userName , String password){
     
     
-    return false;
+    return true;
     }
     
     public boolean signUp(String userName , String password , String email , String phoneNumber){
     
     
-    return false;
+    return true;
     
     
     
