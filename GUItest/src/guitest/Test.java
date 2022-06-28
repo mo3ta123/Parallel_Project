@@ -1,4 +1,5 @@
 package guitest;
+import Project.client.Client;
 import guitest.ServerConst.Items_COLS;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -13,23 +14,13 @@ import org.xml.sax.Attributes;
  * @author Youssef
  */
 
-class Client
-{
-    public Vector<HashMap<String,String>> getInitialItems()
-    {
-        return null; 
-    }
-
-}
-
-
 public class Test extends javax.swing.JFrame {
     DefaultTableModel D1;
     DefaultTableModel cart_table;
    
     
     
-    public void dummy2(){
+    /*public void dummy2(){
     cart_table = (DefaultTableModel)carttable.getModel();
     cart_table.setRowCount(0);
     Vector v1 = new Vector();
@@ -71,22 +62,23 @@ v1.add("300");
 
 D1.addRow(v1);
 
-}
+}*/
 
-    /*public void populateJTable()
+    public void populateJTable()
     {
         Client obj = new Client();
         Vector<HashMap<String,String>> vec = obj.getInitialItems();
-        String[] columnName = {"Id","Name","Amount_available","Categorie", "Price","Image"};
+        String[] columnName = {"Id","Name","Amount_available","Categorie", "Price"/*,"Image"*/};
         Object[][] rows = new Object[vec.size()][6];
         for(int i = 0 ; i < vec.size() ; i++)
         {
             rows[i][0] = vec.get(i).get(Items_COLS.Item_ID);
             rows[i][1] = vec.get(i).get(Items_COLS.Name);
             rows[i][2] = vec.get(i).get(Items_COLS.Amount_available);
+            rows[i][3] = vec.get(i).get(Items_COLS.category);
             rows[i][4] = vec.get(i).get(Items_COLS.Price);
             
-            if(vec.get(i).get(Items_COLS.Img_URL) != null){
+            /*if(vec.get(i).get(Items_COLS.Img_URL) != null){
                 
              ImageIcon image = new ImageIcon(new ImageIcon(vec.get(i).get(Items_COLS.Img_URL)).getImage()
              .getScaledInstance(150, 120, Image.SCALE_SMOOTH) );   
@@ -96,19 +88,19 @@ D1.addRow(v1);
             else{
                 rows[i][5] = null;
             }
-            rows[i][3] = vec.get(i).get(Items_COLS.category);
+            rows[i][3] = vec.get(i).get(Items_COLS.category);*/
         }
-        
-        MyModel model = new MyModel(rows, columnName);
+        DefaultTableModel model = new DefaultTableModel(rows, columnName);
+        //TheModel model = new TheModel(rows, columnName);
         
         HomeTable.setModel(model);
         HomeTable.setRowHeight(120);
-        HomeTable.getColumnModel().getColumn(5).setPreferredWidth(150);
-    }*/
+        //HomeTable.getColumnModel().getColumn(5).setPreferredWidth(150);
+    }
     
     public Test() {
         initComponents();
-        //populateJTable();
+        populateJTable();
         HomePanel.setVisible(false);
         cartpanel.setVisible(false);
         orderhistorypanel.setVisible(false);   
@@ -357,16 +349,10 @@ D1.addRow(v1);
         HomeTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         HomeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Name", "Amount", "category", "Price"
+                "ID", "Name", "Amount", "Category", "Price"
             }
         ) {
             Class[] types = new Class [] {
@@ -386,6 +372,7 @@ D1.addRow(v1);
         });
         HomeTable.setRowHeight(30);
         HomeTable.setShowGrid(true);
+        HomeTable.getTableHeader().setReorderingAllowed(false);
         HomeTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 HomeTableMouseClicked(evt);
@@ -393,7 +380,7 @@ D1.addRow(v1);
         });
         jScrollPane1.setViewportView(HomeTable);
 
-        HomePanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 137, 690, 310));
+        HomePanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 137, 690, 410));
 
         addtocartbtn.setText("Add to Cart");
         addtocartbtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -555,7 +542,7 @@ D1.addRow(v1);
     cartpanel.setVisible(false);
     orderhistorypanel.setVisible(false);   
 
-    dummy();// TODO add your handling code here:
+    //dummy();// TODO add your handling code here:
 
        
     }//GEN-LAST:event_jPanel6MouseClicked
@@ -569,7 +556,7 @@ D1.addRow(v1);
     }//GEN-LAST:event_jPanel6MousePressed
 
     private void HomeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeTableMouseClicked
-        D1 = (DefaultTableModel)HomeTable.getModel();
+        D1 = (DefaultTableModel) HomeTable.getModel();
         int index = HomeTable.getSelectedRow();  // TODO add your handling code here:
     }//GEN-LAST:event_HomeTableMouseClicked
     public void loadtocart(Vector v){
