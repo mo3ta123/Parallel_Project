@@ -23,42 +23,23 @@ public class User {
     Connection connection;
     PreparedStatement prestatement;
     ResultSet resultset;
-    public boolean connect(){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection=DriverManager.getConnection("jdbc:mysql://localhost/Amazon","root","");
-            return true;
-        } catch (Exception ex) {
-            System.out.println("something is worng");
-            return false;
-        }
+    
+    public User(Connection connection){
+           this.connection=connection;
     }
-    public Vector<HashMap<String, String>> insert_user(String u_Name, String u_Password, int u_Balance, String u_Phone, String u_Type){
-        Vector<HashMap<String, String>> result = new Vector<>();
+    public void insert_user(String u_Name, String u_Password, String u_Phone, String email){
         try{
             //Preparing 
-            prestatement=connection.prepareStatement("INSERT INTO User(Name,Password,Balance,Phone,User_type) VALUES(?,?,?,?,?)");
+            prestatement=connection.prepareStatement("INSERT INTO User(Name,Password,Phone,email) VALUES(?,?,?,?)");
             prestatement.setString(1, u_Name);
             prestatement.setString(2, u_Password);
-            prestatement.setString(3, Integer.toString(u_Balance));
-            prestatement.setString(4, u_Phone);
-            prestatement.setString(5, u_Type);
+            prestatement.setString(3, u_Phone);
+            prestatement.setString(4, email);
             prestatement.executeUpdate();
-            prestatement = connection.prepareStatement("SELECT User_ID FROM USER WHERE Name = ? AND PASSWORD = ?");
-            prestatement.setString(1, u_Name);
-            prestatement.setString(2, u_Password);
-            resultset = prestatement.executeQuery();
-            if(resultset.next()){
-                HashMap<String, String> map = new HashMap<String, String>();
-                map.put(User_COLS.USER_ID, resultset.getString(User_COLS.USER_ID));
-                result.add(map);
-                return result;
-            }
         }
         catch(SQLException ex){
             System.out.println("ERROR: Insert Failure");
         }
-        return result;
     }
     public void update_user(int u_ID, String u_Name, String u_Password, int u_Balance, String u_Phone){ //INSERTING AN EMPTY STRING WILL RESULT IN NO CHANGE
         try{
@@ -84,18 +65,14 @@ public class User {
             System.out.println("ERROR: Insert Failure");
         }
     }
-    public Vector<HashMap<String,String>> checkLogin(String u_Name, String u_Password){
-        Vector<HashMap<String,String>> result = new Vector<>();
+    public String checkLogin(String u_Name){
+        String result = null;
         try{
-            prestatement = connection.prepareStatement("SELECT User_ID FROM USER WHERE Name = ? AND Password = ?");
+            prestatement = connection.prepareStatement("SELECT Password FROM USER WHERE Name = ?");
             prestatement.setString(1, u_Name);
-            prestatement.setString(2, u_Password);
             resultset = prestatement.executeQuery();
-            if(resultset.next()){
-                HashMap<String, String> map = new HashMap<String, String>();
-               map.put(User_COLS.USER_ID, resultset.getString(User_COLS.USER_ID));
-               result.add(map);
-            }
+            if(resultset.next())
+                result = resultset.getString(User_COLS.USER_PASS);
             return result;
         }
         catch(SQLException ex){

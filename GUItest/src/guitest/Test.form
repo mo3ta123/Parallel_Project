@@ -49,9 +49,6 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/guitest/imgs/icons8-market-64.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Amazon"/>
           </Properties>
           <Constraints>
@@ -115,9 +112,6 @@
             <Component class="javax.swing.JLabel" name="testlabel1">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/guitest/imgs/icons8-home-20.png"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
@@ -188,9 +182,6 @@
             <Component class="javax.swing.JLabel" name="testlabel2">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/guitest/imgs/icons8-add-shopping-cart-20.png"/>
-                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -237,9 +228,6 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/guitest/imgs/icons8-add-shopping-cart-20.png"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -297,9 +285,6 @@
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/guitest/imgs/icons8-order-history-20.png"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
@@ -354,9 +339,6 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/guitest/imgs/icons8-logout-20.png"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
