@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package amazon_database;
 
 import java.sql.Connection;
@@ -41,18 +45,25 @@ public class DataBase {
     }
     
     public synchronized void addUser(String userName, String Password , String email , String phoneNumber){
-        
+        user.insert_user(userName, Password, phoneNumber, email);
     }
     public synchronized boolean doesUserExist(String userName){
-        
+        if(user.checkLogin(userName) == null)
+            return false;
+        else
+            return true;
     } 
     public synchronized String getEncryptedPassword(String userName){
-        
+        return user.checkLogin(userName);
     }
     
-    public static void main(){
-        
+    public static void main(String args[]){
+        DataBase db = new DataBase();
+        db.addUser("Ahmed", "Pass1234", "test123wa123@hotmail.com", "0110203040");
+        System.out.println(db.doesUserExist("Ahmed"));
+        System.out.println(db.getEncryptedPassword("Ahmed"));
     }
   
     
 }
+
