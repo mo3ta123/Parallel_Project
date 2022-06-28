@@ -13,14 +13,14 @@ import org.xml.sax.Attributes;
  * @author Youssef
  */
 
-/*class Client
+class Client
 {
     public Vector<HashMap<String,String>> getInitialItems()
     {
         return null; 
     }
 
-}*/
+}
 
 
 public class Test extends javax.swing.JFrame {
