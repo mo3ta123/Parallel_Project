@@ -168,7 +168,6 @@ D1.addRow(v1);
 
         jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-market-64.png"))); // NOI18N
         jLabel9.setText("Amazon");
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 60));
 
@@ -186,7 +185,6 @@ D1.addRow(v1);
         });
 
         testlabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        testlabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-home-20.png"))); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -226,7 +224,6 @@ D1.addRow(v1);
         jLabel8.setText("Search");
 
         testlabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        testlabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-add-shopping-cart-20.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -259,7 +256,6 @@ D1.addRow(v1);
         });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-add-shopping-cart-20.png"))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -295,7 +291,6 @@ D1.addRow(v1);
         });
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-order-history-20.png"))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -326,7 +321,6 @@ D1.addRow(v1);
         jPanel2.setBackground(new java.awt.Color(85, 85, 118));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-logout-20.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
