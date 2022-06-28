@@ -66,4 +66,17 @@ INSERT INTO item( Name, Amount_available, category, Img_URL, Price) VALUES
 ("Stark Kettlebell, 24 kg",32,'GYM','https://student.valuxapps.com/storage/uploads/products/161545152160GOl.item_XXL_39275650_152762070.jpeg',1080),
 ("Mask to protect the face, 50 pieces",40,"Health","https://student.valuxapps.com/storage/uploads/products/1638734223uyATp.1.jpg	",45),
 ("Xiaomi Redmi 10 Dual SIM Mobile Phone",23,"Electronics","https://student.valuxapps.com/storage/uploads/products/1638734961565J3.11.jpg",3075),
-("Avony Medical Mask",12,"Health","https://student.valuxapps.com/storage/uploads/products/1638734575kfKn8.21.jpg",28);
+("Avony Medical Mask",12,"Health","https://student.valuxapps.com/storage/uploads/products/1638734575kfKn8.21.jpg",28),
+("Laptop for MacBookpro",37,'Electronics',"https://student.valuxapps.com/storage/uploads/products/1615442168bVx52.item_XXL_36581132_143760083.jpeg",44500),
+("Mesh Women's Training Sneakers",36,"clothes","https://student.valuxapps.com/storage/uploads/products/1638737146iLO2c.11.jpg",1606),
+("Men's NikeNSWIconFutura T-Shirt",15,"clothes","https://student.valuxapps.com/storage/uploads/products/1638737571de5EF.21.jpg",1085),
+("Sony PlayStation 5 Pulse 3D Wireless",22,'Electronics',"https://student.valuxapps.com/storage/uploads/products/16387377980g2kx.11.jpg",1596),
+("Sony WI-C200 Wireless Headphones ",25,'Electronics',"https://student.valuxapps.com/storage/uploads/products/1638737964KFEyZ.21.jpg",499),
+("Xiaomi Smart Bracelet 5-Black",10,'Electronics',"https://student.valuxapps.com/storage/uploads/products/1638735246ToPmP.21.jpg",444),
+("Xiaomi Night Light With Kinetic ",29,'Electronics',"https://student.valuxapps.com/storage/uploads/products/1638738391RrZ5V.21.jpg",400),
+("Circular Lighting Ring ",15,'Electronics',"https://student.valuxapps.com/storage/uploads/products/1638738160hkG50.1.jpg",160.64),
+("Men's JacketCollagenCollagen Uniform",20,"clothes","https://student.valuxapps.com/storage/uploads/products/1644374518pTaSB.10.jpg",404),
+("Patch Pocket Long Sleeve Shirt - Dark Olive",7,"clothes","https://student.valuxapps.com/storage/uploads/products/1644375298PFm8i.14.jpg",225),
+("BLUE FRESH & HIGH COLLECTION - Camel",11,"clothes","https://student.valuxapps.com/storage/uploads/products/1644372386y0SzM.4.jpg",110);
+
+select * from item;
