@@ -1,24 +1,13 @@
 package guitest;
-import client.Client;
+import Project.client.Client;
 import guitest.ServerConst.Items_COLS;
 import java.awt.Image;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Vector;
-import javax.imageio.ImageIO;
-import javax.swing.JTable;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import org.xml.sax.Attributes;
-import java.net.URL;
-import javax.swing.Icon;
-import javax.swing.JOptionPane;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -28,13 +17,58 @@ import javax.swing.table.TableModel;
 public class Test extends javax.swing.JFrame {
     DefaultTableModel D1;
     DefaultTableModel cart_table;
-    Image image = null;
+   
+    
+    
+    /*public void dummy2(){
+    cart_table = (DefaultTableModel)carttable.getModel();
+    cart_table.setRowCount(0);
+    Vector v1 = new Vector();
+    Vector v2 = new Vector();
+    v2.add("Mobile");
+    v2.add("Electornics");
+    v2.add("3");
+    v2.add("9000");
+    
+    cart_table.addRow(v2);
+    
+    v1.add("Toy");
+    v1.add("Toys");
+    v1.add("5");
+    v1.add("300");
+    
+    cart_table.addRow(v1);
+    
+    }
+    
+    
+    public void dummy(){
+    D1 = (DefaultTableModel)HomeTable.getModel();
+    D1.setRowCount(0);
+    Vector v1 = new Vector();
+    Vector v2 = new Vector();
+    v2.add("3432");
+    v2.add("Mobile");
+    v2.add("3");
+    v2.add("Electronics");
+    v2.add("9000");
+
+    D1.addRow(v2);
+v1.add("3932");
+v1.add("Toy");
+v1.add("5");
+v1.add("Toys");
+v1.add("300");
+
+D1.addRow(v1);
+
+}*/
 
     public void populateJTable()
     {
         Client obj = new Client();
         Vector<HashMap<String,String>> vec = obj.getInitialItems();
-        String[] columnName = {"Item Id","Name","Amount","Categorie", "Price" ,"Image"};
+        String[] columnName = {"Id","Name","Amount_available","Categorie", "Price"/*,"Image"*/};
         Object[][] rows = new Object[vec.size()][6];
         for(int i = 0 ; i < vec.size() ; i++)
         {
@@ -44,43 +78,21 @@ public class Test extends javax.swing.JFrame {
             rows[i][3] = vec.get(i).get(Items_COLS.category);
             rows[i][4] = vec.get(i).get(Items_COLS.Price);
             
-            if(vec.get(i).get(Items_COLS.Img_URL) != null)
-            {
-                try {
-                        URL url = new URL(vec.get(i).get(Items_COLS.Img_URL));
-                        image = ImageIO.read(url);
-                    } 
-                catch (IOException e) 
-                    {                   
-                    }
-                JFrame f = new JFrame("Add an image to JFrame");
-                ImageIcon icon = new ImageIcon(image);
-                f.add(new JLabel(icon));
-                f.pack();
-                f.setVisible(true);
-                   /*JFrame frame = new JFrame();
-                    JTable tableimage = new JTable((TableModel) new ImageIcon(image));
-                    frame.getContentPane().add(tableimage, BorderLayout.CENTER);
-                    frame.setSize(300, 400);
-                    frame.setVisible(true);
-                    JPanel mainPanel = new JPanel(new BorderLayout());
-                    mainPanel.add(tableimage);
-                    frame.add(mainPanel);
-                    frame.setVisible(true);
-                JTable lblimage = new JTable();*/
-                    
-                //ImageIcon image1 = new ImageIcon(new ImageIcon(image).getImage()
-                //.getScaledInstance(150, 120, Image.SCALE_SMOOTH) );
+            /*if(vec.get(i).get(Items_COLS.Img_URL) != null){
                 
-                rows[i][5] = new JLabel(icon);
+             ImageIcon image = new ImageIcon(new ImageIcon(vec.get(i).get(Items_COLS.Img_URL)).getImage()
+             .getScaledInstance(150, 120, Image.SCALE_SMOOTH) );   
+                
+            rows[i][5] = image;
             }
-            else
-            {
+            else{
                 rows[i][5] = null;
             }
+            rows[i][3] = vec.get(i).get(Items_COLS.category);*/
         }
         DefaultTableModel model = new DefaultTableModel(rows, columnName);
-
+        //TheModel model = new TheModel(rows, columnName);
+        
         HomeTable.setModel(model);
         HomeTable.setRowHeight(120);
         //HomeTable.getColumnModel().getColumn(5).setPreferredWidth(150);
@@ -88,10 +100,10 @@ public class Test extends javax.swing.JFrame {
     
     public Test() {
         initComponents();
+        populateJTable();
         HomePanel.setVisible(false);
         cartpanel.setVisible(false);
-        orderhistorypanel.setVisible(false);
-        SearchPanel.setVisible(false);
+        orderhistorypanel.setVisible(false);   
 
     }
 
@@ -122,12 +134,13 @@ public class Test extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         HomePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         HomeTable = new javax.swing.JTable();
         addtocartbtn = new javax.swing.JButton();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
         cartpanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -141,15 +154,6 @@ public class Test extends javax.swing.JFrame {
         orderhistorypanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        SearchPanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        SearchTable = new javax.swing.JTable();
-        addtocartSearchPanel = new javax.swing.JButton();
-        SearchTextField = new javax.swing.JTextField();
-        SearchButton = new javax.swing.JButton();
-        clearsearch = new javax.swing.JButton();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -197,7 +201,7 @@ public class Test extends javax.swing.JFrame {
             .addComponent(testlabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -310,6 +314,11 @@ public class Test extends javax.swing.JFrame {
         jPanel7.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 290, 40));
 
         jPanel2.setBackground(new java.awt.Color(85, 85, 118));
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel2MouseClicked(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -339,6 +348,41 @@ public class Test extends javax.swing.JFrame {
 
         jPanel7.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 290, 40));
 
+        jPanel9.setBackground(new java.awt.Color(85, 85, 118));
+        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel9MouseClicked(evt);
+            }
+        });
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel14.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Exit ");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(126, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        jPanel7.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 290, 40));
+
         getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 600));
 
         HomePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -351,9 +395,24 @@ public class Test extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
+                "ID", "Name", "Amount", "Category", "Price"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         HomeTable.setRowHeight(30);
         HomeTable.setShowGrid(true);
         HomeTable.getTableHeader().setReorderingAllowed(false);
@@ -378,31 +437,6 @@ public class Test extends javax.swing.JFrame {
             }
         });
         HomePanel.add(addtocartbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 120, 40));
-
-        jPanel10.setBackground(new java.awt.Color(102, 102, 255));
-
-        jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Home");
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel15)
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
-
-        HomePanel.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(HomePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 590));
 
@@ -543,126 +577,14 @@ public class Test extends javax.swing.JFrame {
 
         getContentPane().add(orderhistorypanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 600));
 
-        SearchPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jScrollPane3.setAutoscrolls(true);
-
-        SearchTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        SearchTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Name", "Amount", "Category", "Price", "Image"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Byte.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        SearchTable.setRowHeight(30);
-        SearchTable.setShowGrid(true);
-        SearchTable.getTableHeader().setReorderingAllowed(false);
-        SearchTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SearchTableMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(SearchTable);
-        if (SearchTable.getColumnModel().getColumnCount() > 0) {
-            SearchTable.getColumnModel().getColumn(0).setHeaderValue("ID");
-            SearchTable.getColumnModel().getColumn(1).setHeaderValue("Name");
-            SearchTable.getColumnModel().getColumn(2).setHeaderValue("Amount");
-            SearchTable.getColumnModel().getColumn(3).setHeaderValue("Category");
-            SearchTable.getColumnModel().getColumn(4).setHeaderValue("Price");
-            SearchTable.getColumnModel().getColumn(5).setHeaderValue("Image");
-        }
-
-        SearchPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 137, 690, 410));
-
-        addtocartSearchPanel.setText("Add to Cart");
-        addtocartSearchPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addtocartSearchPanelMouseClicked(evt);
-            }
-        });
-        addtocartSearchPanel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addtocartSearchPanelActionPerformed(evt);
-            }
-        });
-        SearchPanel.add(addtocartSearchPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 120, 40));
-
-        SearchTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchTextFieldActionPerformed(evt);
-            }
-        });
-        SearchPanel.add(SearchTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 260, 30));
-
-        SearchButton.setText("Search");
-        SearchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchButtonActionPerformed(evt);
-            }
-        });
-        SearchPanel.add(SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, 30));
-
-        clearsearch.setText("CLear");
-        clearsearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearsearchActionPerformed(evt);
-            }
-        });
-        SearchPanel.add(clearsearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, -1, 30));
-
-        jPanel9.setBackground(new java.awt.Color(102, 102, 255));
-
-        jLabel14.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Search");
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel14)
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
-
-        SearchPanel.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        getContentPane().add(SearchPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 590));
-
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
     HomePanel.setVisible(true);
-    populateJTable();
     cartpanel.setVisible(false);
-    orderhistorypanel.setVisible(false);
-    SearchPanel.setVisible(false);
+    orderhistorypanel.setVisible(false);   
 
     //dummy();// TODO add your handling code here:
 
@@ -670,11 +592,7 @@ public class Test extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
-
-        HomePanel.setVisible(false);
-        SearchPanel.setVisible(true);
-        orderhistorypanel.setVisible(false);
-        cartpanel.setVisible(false);// TODO add your handling code here:
+    HomePanel.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
@@ -682,7 +600,6 @@ public class Test extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel6MousePressed
 
     private void HomeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeTableMouseClicked
-
         D1 = (DefaultTableModel) HomeTable.getModel();
         int index = HomeTable.getSelectedRow();  // TODO add your handling code here:
     }//GEN-LAST:event_HomeTableMouseClicked
@@ -729,116 +646,30 @@ public class Test extends javax.swing.JFrame {
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
        HomePanel.setVisible(false);
-       orderhistorypanel.setVisible(false);   
+               orderhistorypanel.setVisible(false);   
+
        cartpanel.setVisible(true);
-       SearchPanel.setVisible(false);
        //dummy2();
        deletebtn.setEnabled(false);
 // TODO add your handling code here:
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-       orderhistorypanel.setVisible(true);   
-       HomePanel.setVisible(false);
-       cartpanel.setVisible(false);
-       SearchPanel.setVisible(false);// TODO add your handling code here:
+        orderhistorypanel.setVisible(true);   
+        HomePanel.setVisible(false);
+       cartpanel.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_jPanel4MouseClicked
 
-    private void SearchTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchTableMouseClicked
-
-        D1 = (DefaultTableModel) SearchTable.getModel();
-        int index = SearchTable.getSelectedRow();
-// TODO add your handling code here:
-    }//GEN-LAST:event_SearchTableMouseClicked
-
-    private void addtocartSearchPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addtocartSearchPanelMouseClicked
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_addtocartSearchPanelMouseClicked
+        new Login().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jPanel2MouseClicked
 
-    private void addtocartSearchPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtocartSearchPanelActionPerformed
-        Vector global = new Vector();
-        D1 = (DefaultTableModel)SearchTable.getModel();
-        int index = SearchTable.getSelectedRow();
-        global.add(D1.getValueAt(index, 0).toString()); 
-        global.add(D1.getValueAt(index, 1).toString());
-        global.add(D1.getValueAt(index, 2).toString());
-        global.add(D1.getValueAt(index, 3).toString());
-        global.add(D1.getValueAt(index, 4).toString());// TODO add your handling code here:
-        
-        loadtocart(global); // TODO add your handling code here:
-    }//GEN-LAST:event_addtocartSearchPanelActionPerformed
-
-    private void SearchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextFieldActionPerformed
-// TODO add your handling code here:
-    }//GEN-LAST:event_SearchTextFieldActionPerformed
-
-    private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
-         String SearchString = SearchTextField.getText();
-         Client obj1 = new Client();
-         Vector<HashMap<String,String>> clientObj1 = obj1.search(SearchString);
-         if(!(clientObj1.isEmpty()))
-        {
-            String[] columnName = {"Item Id","Name","Amount","Categorie", "Price" ,"Image"};
-            Object[][] rows = new Object[clientObj1.size()][6];
-            for(int i = 0 ; i < clientObj1.size() ; i++)
-            {
-                rows[i][0] = clientObj1.get(i).get(Items_COLS.Item_ID);
-                rows[i][1] = clientObj1.get(i).get(Items_COLS.Name);
-                rows[i][2] = clientObj1.get(i).get(Items_COLS.Amount_available);
-                rows[i][3] = clientObj1.get(i).get(Items_COLS.category);
-                rows[i][4] = clientObj1.get(i).get(Items_COLS.Price);
-            
-                if(clientObj1.get(i).get(Items_COLS.Img_URL) != null)
-                {
-                    try {
-                            URL url = new URL(clientObj1.get(i).get(Items_COLS.Img_URL));
-                            image = ImageIO.read(url);
-                        } 
-                    catch (IOException e) 
-                        {                   
-                        }
-                /*JFrame f = new JFrame("Add an image to JFrame");
-                ImageIcon icon = new ImageIcon(image);
-                f.add(new JLabel(icon));
-                f.pack();
-                f.setVisible(true);
-                   /*JFrame frame = new JFrame();
-                    JTable tableimage = new JTable((TableModel) new ImageIcon(image));
-                    frame.getContentPane().add(tableimage, BorderLayout.CENTER);
-                    frame.setSize(300, 400);
-                    frame.setVisible(true);
-                    JPanel mainPanel = new JPanel(new BorderLayout());
-                    mainPanel.add(tableimage);
-                    frame.add(mainPanel);
-                    frame.setVisible(true);
-                JTable lblimage = new JTable();
-                    
-                ImageIcon image1 = new ImageIcon(new ImageIcon(image).getImage()
-                .getScaledInstance(150, 120, Image.SCALE_SMOOTH) );
-                
-                rows[i][5] = new JTable(icon);*/
-                }
-                else
-                {
-                    rows[i][5] = null;
-                }
-            }
-            DefaultTableModel model = new DefaultTableModel(rows, columnName);
-            //TheModel model = new TheModel(rows, columnName);
-        
-            SearchTable.setModel(model);
-            SearchTable.setRowHeight(120);
-            //HomeTable.getColumnModel().getColumn(5).setPreferredWidth(150);
-        }
-        else
-        {
-             JOptionPane.showMessageDialog(this,"item isn't available");
-        }
-    }//GEN-LAST:event_SearchButtonActionPerformed
-
-    private void clearsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearsearchActionPerformed
-        SearchTable.setModel(new DefaultTableModel(null, new String[]{"Item Id","Name","Amount","Categorie", "Price" ,"Image"} ));// TODO add your handling code here:
-    }//GEN-LAST:event_clearsearchActionPerformed
+    private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jPanel9MouseClicked
 
     /**
      * @param args the command line arguments
@@ -879,15 +710,9 @@ public class Test extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HomePanel;
     private javax.swing.JTable HomeTable;
-    private javax.swing.JButton SearchButton;
-    private javax.swing.JPanel SearchPanel;
-    private javax.swing.JTable SearchTable;
-    private javax.swing.JTextField SearchTextField;
-    private javax.swing.JButton addtocartSearchPanel;
     private javax.swing.JButton addtocartbtn;
     private javax.swing.JPanel cartpanel;
     private javax.swing.JTable carttable;
-    private javax.swing.JButton clearsearch;
     private javax.swing.JButton deletebtn;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -897,16 +722,15 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -917,7 +741,6 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel orderhistorypanel;
     private javax.swing.JTextField qtyfield;
