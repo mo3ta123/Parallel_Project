@@ -50,34 +50,26 @@ public class Test extends javax.swing.JFrame {
                     } 
                 catch (IOException e) 
                     {                   
-                    }
-                JFrame f = new JFrame("Add an image to JFrame");
-                ImageIcon icon = new ImageIcon(image);
-                /*f.add(new JLabel(icon));
-                f.pack();
-                f.setVisible(true);*/
-                   /*JFrame frame = new JFrame();
-                    JTable tableimage = new JTable((TableModel) new ImageIcon(image));
-                    frame.getContentPane().add(tableimage, BorderLayout.CENTER);
-                    frame.setSize(300, 400);
-                    frame.setVisible(true);
-                    JPanel mainPanel = new JPanel(new BorderLayout());
-                    mainPanel.add(tableimage);
-                    frame.add(mainPanel);
-                    frame.setVisible(true);
-                JTable lblimage = new JTable();*/
-                    
-                //ImageIcon image1 = new ImageIcon(new ImageIcon(image).getImage()
-                //.getScaledInstance(150, 120, Image.SCALE_SMOOTH) );
+                    }                    
+                ImageIcon image1 = new ImageIcon(new ImageIcon(image).getImage()
+                .getScaledInstance(100, 100, Image.SCALE_SMOOTH) );
                 
-                rows[i][5] = new JLabel(icon);
+                rows[i][5] = image1;
             }
             else
             {
                 rows[i][5] = null;
             }
         }
-        DefaultTableModel model = new DefaultTableModel(rows, columnName);
+        DefaultTableModel model = new DefaultTableModel(rows, columnName){
+            @Override
+            public Class<?> getColumnClass(int column) {
+                return switch (column) {
+                    case 5 -> ImageIcon.class;
+                    default -> Object.class;
+                };
+            }
+        };
 
         HomeTable.setModel(model);
         HomeTable.setRowHeight(120);
@@ -401,7 +393,7 @@ public class Test extends javax.swing.JFrame {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Byte.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
