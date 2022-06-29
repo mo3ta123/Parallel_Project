@@ -31,7 +31,7 @@ public class Test extends javax.swing.JFrame {
     String g_uname;
     
     
-     public Test() {
+    public Test() {
      initComponents();
     }
 
