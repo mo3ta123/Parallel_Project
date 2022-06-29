@@ -221,7 +221,7 @@ public class Login extends javax.swing.JFrame {
         boolean x = c1.login(userName, password);
         
         if (x){
-        new Test().setVisible(true); //Call Test Screen
+        new Test(userName).setVisible(true); //Call Test Screen
         this.setVisible(false);
         }else{
         JOptionPane.showMessageDialog(this,"Invalid User Name or Password!");

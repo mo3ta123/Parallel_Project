@@ -1,6 +1,6 @@
 package guitest;
 import client.Client;
-import guitest.ServerConst.Items_COLS;
+import guitest.ServerConst.*;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
@@ -17,17 +17,61 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.xml.sax.Attributes;
 
+
 /**
  *
  * @author Youssef
  */
 
+
 public class Test extends javax.swing.JFrame {
     DefaultTableModel D1;
     DefaultTableModel cart_table;
     Image image = null;
+    String g_uname;
     
+    
+     public Test() {
+     initComponents();
+    }
 
+    public Test(String username) {
+        initComponents();
+        populateJTable();
+        HomePanel.setVisible(false);
+        cartpanel.setVisible(false);
+        orderhistorypanel.setVisible(false);
+        SearchPanel.setVisible(false);
+        
+        g_uname = username;
+
+    }
+    
+ public void populateCart(String username)
+    {
+        Client obj = new Client();
+        Vector<HashMap<String,String>> vec = obj.getMyCart(username);
+        String[] columnName = {"Item Id","Name","Amount","Categorie", "Total Price"};
+        Object[][] rows = new Object[vec.size()][6];
+        for(int i = 0 ; i < vec.size() ; i++)
+        {
+            rows[i][0] = vec.get(i).get(Items_COLS.Item_ID);
+            rows[i][1] = vec.get(i).get(Items_COLS.Name);
+            rows[i][2] = vec.get(i).get(Cart_COLS.Amount);
+            rows[i][3] = vec.get(i).get(Items_COLS.category);
+            rows[i][4] = String.valueOf( Double. parseDouble((vec.get(i).get(Items_COLS.Price))) * Double. parseDouble(vec.get(i).get(Cart_COLS.Amount)) );
+            
+ 
+        }
+        DefaultTableModel model = new DefaultTableModel(rows, columnName);
+
+        carttable.setModel(model);
+        carttable.setRowHeight(120);
+    }
+    
+    
+    
+    
  public void populateJTable()
     {
         Client obj = new Client();
@@ -76,15 +120,7 @@ public class Test extends javax.swing.JFrame {
         //HomeTable.getColumnModel().getColumn(5).setPreferredWidth(150);
     }
     
-    public Test() {
-        initComponents();
-        populateJTable();
-        HomePanel.setVisible(false);
-        cartpanel.setVisible(false);
-        orderhistorypanel.setVisible(false);
-        SearchPanel.setVisible(false);
 
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -732,21 +768,10 @@ public class Test extends javax.swing.JFrame {
         D1 = (DefaultTableModel) HomeTable.getModel();
         int index = HomeTable.getSelectedRow();  // TODO add your handling code here:
     }//GEN-LAST:event_HomeTableMouseClicked
-    public void loadtocart(Vector v){
-    cart_table = (DefaultTableModel)carttable.getModel();
-    cart_table.addRow(v);
-    }
+ 
     private void addtocartbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtocartbtnActionPerformed
-        Vector global = new Vector();
-        D1 = (DefaultTableModel)HomeTable.getModel();
-        int index = HomeTable.getSelectedRow();
-        global.add(D1.getValueAt(index, 0).toString()); 
-        global.add(D1.getValueAt(index, 1).toString());
-        global.add(D1.getValueAt(index, 2).toString());
-        global.add(D1.getValueAt(index, 3).toString());
-        global.add(D1.getValueAt(index, 4).toString());// TODO add your handling code here:
+
         
-        loadtocart(global);
     }//GEN-LAST:event_addtocartbtnActionPerformed
 
     private void addtocartbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addtocartbtnMouseClicked
@@ -779,7 +804,10 @@ public class Test extends javax.swing.JFrame {
        SearchPanel.setVisible(false);
        cartpanel.setVisible(true);
        deletebtn.setEnabled(false);
-// TODO add your handling code here:
+       
+       populateCart(g_uname);
+       
+// YOUR CART
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
@@ -869,16 +897,7 @@ public class Test extends javax.swing.JFrame {
     }//GEN-LAST:event_clearsearchActionPerformed
 
     private void addtocartSearchPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtocartSearchPanelActionPerformed
-        Vector global = new Vector();
-        D1 = (DefaultTableModel)SearchTable.getModel();
-        int index = SearchTable.getSelectedRow();
-        global.add(D1.getValueAt(index, 0).toString()); 
-        global.add(D1.getValueAt(index, 1).toString());
-        global.add(D1.getValueAt(index, 2).toString());
-        global.add(D1.getValueAt(index, 3).toString());
-        global.add(D1.getValueAt(index, 4).toString());
-        
-        loadtocart(global); // TODO add your handling code here:
+    
     }//GEN-LAST:event_addtocartSearchPanelActionPerformed
 
     private void SearchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextFieldActionPerformed
