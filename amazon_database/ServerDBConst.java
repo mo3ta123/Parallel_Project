@@ -11,6 +11,7 @@ public class ServerDBConst {
     public static class User_COLS{
         public static final String USER_NAME = "Name";
         public static final String USER_PASS = "Password";
+        public static final String USER_ID = "User_ID";
         public static final String USER_EMAIL = "email";
         public static final String USER_BAL = "Balance";
         public static final String USER_PHONE = "Phone";
