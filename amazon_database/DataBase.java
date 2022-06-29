@@ -56,14 +56,29 @@ public class DataBase {
     public synchronized String getEncryptedPassword(String userName){
         return user.checkLogin(userName);
     }
-    
+    public synchronized void depositBalance(String userName, double amount)
+    {
+        user.update_user(userName, "", amount, "");
+    }
+    public synchronized double getBalance(String userName){
+        HashMap<String, String> result = user.output_user(userName);
+        if(result.isEmpty())
+            return -1; // NO SUCH USER EXISTS RETURN -1
+        else
+            return Double.parseDouble(result.get(User_COLS.USER_BAL));
+    }
+    public synchronized boolean isAdminExists(String userName , String password){
+        String pass = getEncryptedPassword(userName);
+        return pass.equals(password);
+        
+    }
     public static void main(String args[]){
         DataBase db = new DataBase();
-        db.addUser("Ahmed", "Pass1234", "test123wa123@hotmail.com", "0110203040");
+        //db.addUser("Ahmed", "Pass1234", "test123wa123@hotmail.com", "0110203040");
         System.out.println(db.doesUserExist("Ahmed"));
         System.out.println(db.getEncryptedPassword("Ahmed"));
+        db.depositBalance("Ahmed", 2510.2);
+        System.out.println(db.getBalance("Ahmed"));
+        System.out.println(db.isAdminExists("ADMIN", "xajfk"));
     }
-  
-    
 }
-
