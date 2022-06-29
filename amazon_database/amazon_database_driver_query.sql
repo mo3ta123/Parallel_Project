@@ -6,7 +6,7 @@ create table User(
     Phone VARCHAR(12),
     email varchar (40),
     Password VARCHAR(20) NOT NULL,
-    Balance INTEGER default 0,
+    Balance FLOAT default 0,
     User_type enum('admin','client') default 'client',
     primary key (Name)
 );
