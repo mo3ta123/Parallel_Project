@@ -86,5 +86,10 @@ public class DataBase {
         db.depositBalance("Ahmed", 2510.2);
         System.out.println(db.getBalance("Ahmed"));
         System.out.println(db.isAdminExists("ADMIN", "xajfk"));
+        Vector<HashMap<String, String>> test;
+        test = db.getAccountInfo("Ahmed");
+        for(int i = 0; i < test.size(); i++){
+            System.out.println(test.get(i).get(User_COLS.USER_NAME) +test.get(i).get(User_COLS.USER_TYPE)+ test.get(i).get(User_COLS.USER_BAL) + " " + test.get(i).get(User_COLS.USER_EMAIL) + test.get(i).get(User_COLS.USER_PASS) + test.get(i).get(User_COLS.USER_PHONE));
+        }
     }
 }
