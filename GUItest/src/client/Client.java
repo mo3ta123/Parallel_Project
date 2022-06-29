@@ -1,5 +1,6 @@
 package client;
 
+import guitest.ServerConst;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -105,4 +106,61 @@ public class Client {
     public boolean editItemAtCart(String userName , int itemID, int quantity){
         return false;
     }
+    
+    
+    
+    public  Vector<HashMap<String,String>> getTransactionHistory(String userName){
+    
+    Vector<HashMap<String,String>> items = new Vector<HashMap<String,String>>();
+
+            HashMap<String,String> item1 = new HashMap<String,String>();
+         
+            item1.put(ServerConst.Transaction_COLS.Transaction_type, "Deposit");
+            item1.put(ServerConst.Transaction_COLS.Transaction_ID, "20");
+            item1.put(ServerConst.Transaction_COLS.Transaction_date, "13/4/3055");
+            item1.put(ServerConst.Transaction_COLS.money_Amount, "5600");
+            
+
+            items.add(item1);
+            return items;
+    
+    }
+    
+    public Vector<HashMap<String,String>> getItemBoughtList(String userName){
+    
+        
+        Vector<HashMap<String,String>> items = new Vector<HashMap<String,String>>();
+
+            HashMap<String,String> item1 = new HashMap<String,String>();
+            item1.put("Item_ID", "1");
+            item1.put("Name", "Camera");
+            item1.put("Amount_available", "20");
+            item1.put(ServerConst.Transaction_COLS.Transaction_date, "13/4/3055");
+            item1.put(ServerConst.Holds_COLS.Amount, "56");
+            item1.put("Price", "5000");
+
+            items.add(item1);
+            return items;
+    
+    }
+    
+   public Vector<HashMap<String,String>> getAccountInfo(String userName){
+           Vector<HashMap<String,String>> items = new Vector<HashMap<String,String>>();
+
+            HashMap<String,String> item1 = new HashMap<String,String>();
+            item1.put(ServerConst.User_COLS.USER_NAME, "Mohamed");
+            item1.put(ServerConst.User_COLS.USER_PHONE, "0329328");
+            item1.put(ServerConst.User_COLS.USER_EMAIL, "hola@yahoo.com");
+            item1.put(ServerConst.User_COLS.USER_BAL, "3055");
+
+            items.add(item1);
+            return items;
+    
+   
+   }
+   
+   public void depositCash(String userName,double value){
+   
+   
+   }
 }
