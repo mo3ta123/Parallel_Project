@@ -49,6 +49,7 @@ CREATE TABLE cart(
     foreign key(item_id) references item(item_id)
 );
 
+INSERT INTO User(Name, Password) VALUES("ADMIN", "xajfk");
 
 INSERT INTO item( Name, Amount_available, category, Img_URL, Price) VALUES 
 ('Camera',20,'Electronics','https://egyptlaptop.com/images/detailed/31/1594281073_IMG_1384580.jpg',5000),
