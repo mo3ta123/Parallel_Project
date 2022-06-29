@@ -37,7 +37,6 @@ public class Test extends javax.swing.JFrame {
 
     public Test(String username) {
         initComponents();
-        populateJTable();
         HomePanel.setVisible(false);
         cartpanel.setVisible(false);
         orderhistorypanel.setVisible(false);
@@ -769,11 +768,11 @@ public class Test extends javax.swing.JFrame {
 
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
     HomePanel.setVisible(true);
+    populateJTable();
     cartpanel.setVisible(false);
     orderhistorypanel.setVisible(false);
     SearchPanel.setVisible(false);
-
-    //dummy();// TODO add your handling code here:
+        // TODO add your handling code here:
 
        
     }//GEN-LAST:event_jPanel6MouseClicked
