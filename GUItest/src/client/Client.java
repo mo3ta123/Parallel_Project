@@ -89,7 +89,7 @@ public class Client {
             item1.put("Name", "Camera");
             item1.put("Amount_available", "20");
             item1.put("category", "'Electronics'");
-            //item1.put("Img_URL", "https://egyptlaptop.com/images/detailed/31/1594281073_IMG_1384580.jpg");
+            item1.put("Img_URL", "https://egyptlaptop.com/images/detailed/31/1594281073_IMG_1384580.jpg");
             item1.put("Price", "5000");
 
             items.add(item1);
@@ -101,5 +101,8 @@ public class Client {
             
         }
         
+    }
+    public boolean editItemAtCart(String userName , int itemID, int quantity){
+        return false;
     }
 }
