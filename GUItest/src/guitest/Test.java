@@ -1333,6 +1333,7 @@ public class Test extends javax.swing.JFrame {
         populateCart(g_uname);
         qtyfield.setText("");
         deletebtn.setEnabled(false);
+        //uwu
         
       
     }//GEN-LAST:event_jButton3ActionPerformed
