@@ -7,7 +7,7 @@ create table User(
     email varchar (40),
     Password VARCHAR(20) NOT NULL,
     Balance INTEGER default 0,
-    User_type enum('admin','client') default client,
+    User_type enum('admin','client') default 'client',
     primary key (Name)
 );
 
