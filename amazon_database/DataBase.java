@@ -72,7 +72,54 @@ public class DataBase {
         return pass.equals(password);
         
     }
-    
+    public synchronized void clearCart(String userName)
+    {
+        cart.cartDeleteUser(userName);
+    }
+    public synchronized void makeTransaction(String user_name,double money_amount,String transaction_type,Vector<HashMap<String,String>> items_id)
+    {
+        transaction.transaction_input(user_name, money_amount, transaction_type, items_id);
+    }
+    public synchronized Vector<HashMap<String,String>> search(String searchString)
+    {
+       return item.searchItems(searchString);
+    }
+    public synchronized Vector<HashMap<String,String>> getMyCart(String userName)
+    {
+        return cart.cartGetUser(userName);
+    }
+    public synchronized void removeCartItem(String userName, int itemID)
+    {
+        cart.deleteItemCart(userName, itemID);
+    }
+    public  synchronized  void addItemInCart(String userName,int ItemID , int quantity)
+    {
+        cart.addItemCart(userName, ItemID, quantity);
+    }
+    public  synchronized  void updateCartQuantity(String userName,int ItemID , int quantity)
+    {
+       cart.updateCartAmount(userName, ItemID, quantity);
+    }
+    public synchronized boolean isItemExistsInCart(String userName, int ItemID)
+    {
+        return cart.isItemExistsInCart(userName,ItemID);
+    }
+    public synchronized Vector<HashMap<String,String>> getTransactionHistory(String userName)
+    {
+        return transaction.transactionOutputUser(userName);
+    }
+    public synchronized Vector<HashMap<String,String>> getItemBoughtList(String userName)
+    {
+        return transaction.items_bought_list(userName);
+    }
+    public synchronized Vector<HashMap<String,String>> getAllTransactions()
+    {
+        return transaction.transaction_output();
+    }
+    public synchronized Vector<HashMap<String,String>> getAllItemBoughtList()
+    {
+        return transaction.items_bought_list_all();
+    }
      public synchronized Vector<HashMap<String, String>> getAccountInfo(String userName){
         Vector<HashMap<String, String>> result = new Vector<HashMap<String, String>>();
         result.add(user.output_user(userName));
