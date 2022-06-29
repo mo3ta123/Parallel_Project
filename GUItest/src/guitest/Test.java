@@ -1,5 +1,5 @@
 package guitest;
-import Project.client.Client;
+import client.Client;
 import guitest.ServerConst.Items_COLS;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -141,6 +141,8 @@ D1.addRow(v1);
         jScrollPane1 = new javax.swing.JScrollPane();
         HomeTable = new javax.swing.JTable();
         addtocartbtn = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
         cartpanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -154,6 +156,15 @@ D1.addRow(v1);
         orderhistorypanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
+        SearchPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        SearchTable = new javax.swing.JTable();
+        addtocartSearchPanel = new javax.swing.JButton();
+        SearchTextField = new javax.swing.JTextField();
+        SearchButton = new javax.swing.JButton();
+        clearsearch = new javax.swing.JButton();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -201,7 +212,7 @@ D1.addRow(v1);
             .addComponent(testlabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -378,7 +389,7 @@ D1.addRow(v1);
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 290, 40));
@@ -395,24 +406,9 @@ D1.addRow(v1);
 
             },
             new String [] {
-                "ID", "Name", "Amount", "Category", "Price"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         HomeTable.setRowHeight(30);
         HomeTable.setShowGrid(true);
         HomeTable.getTableHeader().setReorderingAllowed(false);
@@ -437,6 +433,31 @@ D1.addRow(v1);
             }
         });
         HomePanel.add(addtocartbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 120, 40));
+
+        jPanel10.setBackground(new java.awt.Color(102, 102, 255));
+
+        jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Home");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel15)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+
+        HomePanel.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(HomePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 590));
 
@@ -577,6 +598,122 @@ D1.addRow(v1);
 
         getContentPane().add(orderhistorypanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 600));
 
+        SearchPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane3.setAutoscrolls(true);
+
+        SearchTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        SearchTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Amount", "Category", "Price", "Image"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Byte.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        SearchTable.setRowHeight(30);
+        SearchTable.setShowGrid(true);
+        SearchTable.getTableHeader().setReorderingAllowed(false);
+        SearchTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchTableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(SearchTable);
+        if (SearchTable.getColumnModel().getColumnCount() > 0) {
+            SearchTable.getColumnModel().getColumn(0).setHeaderValue("ID");
+            SearchTable.getColumnModel().getColumn(1).setHeaderValue("Name");
+            SearchTable.getColumnModel().getColumn(2).setHeaderValue("Amount");
+            SearchTable.getColumnModel().getColumn(3).setHeaderValue("Category");
+            SearchTable.getColumnModel().getColumn(4).setHeaderValue("Price");
+            SearchTable.getColumnModel().getColumn(5).setHeaderValue("Image");
+        }
+
+        SearchPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 137, 690, 410));
+
+        addtocartSearchPanel.setText("Add to Cart");
+        addtocartSearchPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addtocartSearchPanelMouseClicked(evt);
+            }
+        });
+        addtocartSearchPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addtocartSearchPanelActionPerformed(evt);
+            }
+        });
+        SearchPanel.add(addtocartSearchPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 120, 40));
+
+        SearchTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchTextFieldActionPerformed(evt);
+            }
+        });
+        SearchPanel.add(SearchTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 260, 30));
+
+        SearchButton.setText("Search");
+        SearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchButtonActionPerformed(evt);
+            }
+        });
+        SearchButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                SearchButtonKeyPressed(evt);
+            }
+        });
+        SearchPanel.add(SearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, 30));
+
+        clearsearch.setText("CLear");
+        clearsearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearsearchActionPerformed(evt);
+            }
+        });
+        SearchPanel.add(clearsearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, -1, 30));
+
+        jPanel11.setBackground(new java.awt.Color(102, 102, 255));
+
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Search");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jLabel16)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+
+        SearchPanel.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        getContentPane().add(SearchPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 590));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -671,6 +808,10 @@ D1.addRow(v1);
         this.setVisible(false);
     }//GEN-LAST:event_jPanel9MouseClicked
 
+    private void SearchButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchButtonKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchButtonKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -710,9 +851,15 @@ D1.addRow(v1);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HomePanel;
     private javax.swing.JTable HomeTable;
+    private javax.swing.JButton SearchButton;
+    private javax.swing.JPanel SearchPanel;
+    private javax.swing.JTable SearchTable;
+    private javax.swing.JTextField SearchTextField;
+    private javax.swing.JButton addtocartSearchPanel;
     private javax.swing.JButton addtocartbtn;
     private javax.swing.JPanel cartpanel;
     private javax.swing.JTable carttable;
+    private javax.swing.JButton clearsearch;
     private javax.swing.JButton deletebtn;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -722,6 +869,8 @@ D1.addRow(v1);
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -731,6 +880,8 @@ D1.addRow(v1);
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -741,6 +892,7 @@ D1.addRow(v1);
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel orderhistorypanel;
     private javax.swing.JTextField qtyfield;

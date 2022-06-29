@@ -9,7 +9,7 @@ package guitest;
  *
  * @author YASSEN
  */
-import Project.client.Client;
+import client.Client;
 import javax.swing.JOptionPane;
 public class signUp extends javax.swing.JFrame {
 
