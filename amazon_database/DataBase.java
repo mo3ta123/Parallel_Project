@@ -20,6 +20,7 @@ public class DataBase {
     Transaction transaction;
     Item item;
     User user;
+    Cart cart;
     public boolean connect(){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -42,6 +43,7 @@ public class DataBase {
         transaction = new Transaction(connection);
         item =new Item(connection);
         user=new User(connection);
+        cart=new Cart(connection);
     }
     
     public synchronized void addUser(String userName, String Password , String email , String phoneNumber){
