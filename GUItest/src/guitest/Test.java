@@ -47,6 +47,56 @@ public class Test extends javax.swing.JFrame {
 
     }
     
+    public void populateTransactionHistoryTable()
+    {
+        Client obj = new Client();
+        Vector<HashMap<String,String>> vec = obj.getTransactionHistory(g_uname);
+        String[] columnName = {"Transaction Id","Date","Type","Amount"};
+        Object[][] rows = new Object[vec.size()][4];
+        for(int i = 0 ; i < vec.size() ; i++)
+        {
+            rows[i][0] = vec.get(i).get(Transaction_COLS.Transaction_ID);
+            rows[i][1] = vec.get(i).get(Transaction_COLS.Transaction_date);
+            rows[i][2] = vec.get(i).get(Transaction_COLS.Transaction_type);
+            rows[i][3] = vec.get(i).get(Transaction_COLS.money_Amount);
+            
+            
+            
+        }
+        DefaultTableModel model = new DefaultTableModel(rows, columnName);
+
+        transactionhistorytable.setModel(model);
+    }
+    
+    
+    public void populateOrderHistoryTable()
+    {
+        Client obj = new Client();
+        Vector<HashMap<String,String>> vec = obj.getItemBoughtList(g_uname);
+        String[] columnName = {"Item Id","Name","Price","Date", "Amount Bought"};
+        Object[][] rows = new Object[vec.size()][5];
+        for(int i = 0 ; i < vec.size() ; i++)
+        {
+            rows[i][0] = vec.get(i).get(Items_COLS.Item_ID);
+            rows[i][1] = vec.get(i).get(Items_COLS.Name);
+            rows[i][2] = vec.get(i).get(Items_COLS.Price);
+            rows[i][3] = vec.get(i).get(Transaction_COLS.Transaction_date);
+            rows[i][4] = vec.get(i).get(Holds_COLS.Amount);
+            
+            
+        }
+        DefaultTableModel model = new DefaultTableModel(rows, columnName);
+
+        orderhistorytable.setModel(model);
+    }
+    
+    
+    /* ****************************************************************
+    ***********************POPULATE CART TABLE*************************
+    *******************************************************************
+    */
+    
+    
  public void populateCart(String username)
     {
         Client obj = new Client();
@@ -96,7 +146,10 @@ public class Test extends javax.swing.JFrame {
     }
     
     
-    
+  /* ****************************************************************
+    ***********************POPULATE HOME TABLE*************************
+    *******************************************************************
+    */   
     
  public void populateJTable()
     {
@@ -195,7 +248,26 @@ public class Test extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         orderhistorypanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        unamelabel = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        phonelabel = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        emaillabel = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        balancelabel = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        depositfield = new javax.swing.JTextField();
+        depositbtn = new javax.swing.JButton();
+        orderhistorybtn = new javax.swing.JButton();
+        transactionhistorybtn = new javax.swing.JButton();
+        orderhistorypanelbtn = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        orderhistorytable = new javax.swing.JTable();
+        trasactionpanel = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        transactionhistorytable = new javax.swing.JTable();
         SearchPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         SearchTable = new javax.swing.JTable();
@@ -341,7 +413,7 @@ public class Test extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Orders History");
+        jLabel6.setText("User Information");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -351,8 +423,8 @@ public class Test extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,6 +645,11 @@ public class Test extends javax.swing.JFrame {
         jLabel13.setText("Qty");
 
         jButton3.setText("Edit Quantity");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cartpanelLayout = new javax.swing.GroupLayout(cartpanel);
         cartpanel.setLayout(cartpanelLayout);
@@ -617,25 +694,201 @@ public class Test extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(102, 102, 255));
 
-        jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Order History");
+        unamelabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        unamelabel.setForeground(new java.awt.Color(255, 255, 255));
+        unamelabel.setText("ssssss");
+
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Username:");
+
+        jLabel20.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Phone:");
+
+        phonelabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        phonelabel.setForeground(new java.awt.Color(255, 255, 255));
+        phonelabel.setText("ssssss");
+
+        jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Email:");
+
+        emaillabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        emaillabel.setForeground(new java.awt.Color(255, 255, 255));
+        emaillabel.setText("ssssss");
+
+        jLabel22.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Balance:");
+
+        balancelabel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        balancelabel.setForeground(new java.awt.Color(255, 255, 255));
+        balancelabel.setText("ssssss");
+
+        jLabel23.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("User Information");
+
+        jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Enter Amount");
+
+        depositbtn.setText("Deposit");
+        depositbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                depositbtnActionPerformed(evt);
+            }
+        });
+
+        orderhistorybtn.setText("Order History");
+        orderhistorybtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderhistorybtnActionPerformed(evt);
+            }
+        });
+
+        transactionhistorybtn.setText("Transaction History");
+        transactionhistorybtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transactionhistorybtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(340, Short.MAX_VALUE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(orderhistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(transactionhistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(83, 83, 83)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(balancelabel))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel21)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(emaillabel))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addComponent(jLabel19)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(unamelabel))
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addComponent(jLabel20)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(phonelabel))))))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(depositfield, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(depositbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel12)
-                .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap(23, Short.MAX_VALUE)
+                        .addComponent(jLabel23)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(orderhistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(transactionhistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(69, 69, 69))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(unamelabel)
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel20)
+                            .addComponent(phonelabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21)
+                            .addComponent(emaillabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(balancelabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(depositfield, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(depositbtn)))
+                .addGap(32, 32, 32))
+        );
+
+        orderhistorytable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Item ID", "Name ", "Price", "Date", "Amount Bought"
+            }
+        ));
+        jScrollPane4.setViewportView(orderhistorytable);
+
+        javax.swing.GroupLayout orderhistorypanelbtnLayout = new javax.swing.GroupLayout(orderhistorypanelbtn);
+        orderhistorypanelbtn.setLayout(orderhistorypanelbtnLayout);
+        orderhistorypanelbtnLayout.setHorizontalGroup(
+            orderhistorypanelbtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(orderhistorypanelbtnLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4)
+                .addContainerGap())
+        );
+        orderhistorypanelbtnLayout.setVerticalGroup(
+            orderhistorypanelbtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(orderhistorypanelbtnLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        transactionhistorytable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Transaction ID", "Date", "Type", "Amount"
+            }
+        ));
+        jScrollPane5.setViewportView(transactionhistorytable);
+
+        javax.swing.GroupLayout trasactionpanelLayout = new javax.swing.GroupLayout(trasactionpanel);
+        trasactionpanel.setLayout(trasactionpanelLayout);
+        trasactionpanelLayout.setHorizontalGroup(
+            trasactionpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trasactionpanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        trasactionpanelLayout.setVerticalGroup(
+            trasactionpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(trasactionpanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout orderhistorypanelLayout = new javax.swing.GroupLayout(orderhistorypanel);
@@ -643,13 +896,25 @@ public class Test extends javax.swing.JFrame {
         orderhistorypanelLayout.setHorizontalGroup(
             orderhistorypanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(orderhistorypanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(orderhistorypanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(orderhistorypanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(trasactionpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         orderhistorypanelLayout.setVerticalGroup(
             orderhistorypanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(orderhistorypanelLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(23, 23, 23)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(385, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(orderhistorypanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(orderhistorypanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(orderhistorypanelLayout.createSequentialGroup()
+                    .addGap(263, 263, 263)
+                    .addComponent(trasactionpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(10, 10, 10)))
         );
 
         getContentPane().add(orderhistorypanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 600));
@@ -767,6 +1032,12 @@ public class Test extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+     /* ****************************************************************
+    ***********************Home button Clicked*************************
+    *******************************************************************
+    */
+    
     private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
     HomePanel.setVisible(true);
     cartpanel.setVisible(false);
@@ -778,6 +1049,12 @@ public class Test extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jPanel6MouseClicked
 
+    
+     /* ****************************************************************
+    ***********************Search Button Clicked*************************
+    *******************************************************************
+    */
+    
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
     HomePanel.setVisible(false);
     cartpanel.setVisible(false);
@@ -795,6 +1072,11 @@ public class Test extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_HomeTableMouseClicked
  
+     /* ****************************************************************
+    ***********************Add to Cart Btn in Home Panel*************************
+    *******************************************************************
+    */
+    
     private void addtocartbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtocartbtnActionPerformed
         Client c1 = new Client();    
         D1 = (DefaultTableModel) HomeTable.getModel();
@@ -817,6 +1099,12 @@ public class Test extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addtocartbtnMouseClicked
 
+     /* ****************************************************************
+    ***********************Row Selected in Cart Panel*************************
+    *******************************************************************
+    */
+    
+    
     private void carttableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carttableMouseClicked
         cart_table = (DefaultTableModel)carttable.getModel();      // TODO add your handling code here:
         int index = carttable.getSelectedRow();
@@ -828,15 +1116,28 @@ public class Test extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+     /* ****************************************************************
+    ***********************Delete btn in Cart Panel*************************
+    *******************************************************************
+    */
+    
     private void deletebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletebtnActionPerformed
         // TODO add your handling code here:
         deletebtn.setEnabled(false);
         cart_table = (DefaultTableModel)carttable.getModel();      // TODO add your handling code here:
         int index = carttable.getSelectedRow();
-        cart_table.removeRow(index);
+        
+        Client c1 = new Client();
+        c1.editItemAtCart(g_uname, Integer.valueOf(cart_table.getValueAt(index, 0).toString()) , 0);
+        populateCart(g_uname);
         qtyfield.setText("");
     }//GEN-LAST:event_deletebtnActionPerformed
 
+     /* ****************************************************************
+    ***********************Your Cart Button Clicked*************************
+    *******************************************************************
+    */
+    
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
        HomePanel.setVisible(false);
        orderhistorypanel.setVisible(false);
@@ -849,24 +1150,67 @@ public class Test extends javax.swing.JFrame {
 // YOUR CART
     }//GEN-LAST:event_jPanel3MouseClicked
 
+    
+     /* ****************************************************************
+    ***********************History Clicked*************************
+    *******************************************************************
+    */
+    
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         orderhistorypanel.setVisible(true);   
         HomePanel.setVisible(false);
         cartpanel.setVisible(false);
         SearchPanel.setVisible(false);// TODO add your handling code here:
+        
+        orderhistorypanelbtn.setVisible(false);
+        trasactionpanel.setVisible(false);
+        
+        
+        Client c1 = new Client();
+        Vector<HashMap<String,String>> vec = c1.getAccountInfo(g_uname);
+        unamelabel.setText(vec.get(0).get(User_COLS.USER_NAME));
+        phonelabel.setText(vec.get(0).get(User_COLS.USER_PHONE));
+        emaillabel.setText(vec.get(0).get(User_COLS.USER_EMAIL));
+        balancelabel.setText(vec.get(0).get(User_COLS.USER_BAL));
+        
+        
+        
     }//GEN-LAST:event_jPanel4MouseClicked
 
+     /* ****************************************************************
+    ***********************Logout Button Clicked*************************
+    *******************************************************************
+    */
+    
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         // TODO add your handling code here:
         new Login().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jPanel2MouseClicked
-
+ 
+    
+    
+    
+    /* ****************************************************************
+    ***********************Exit Button Clicked*************************
+    *******************************************************************
+    */
+    
+    
+    
     private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jPanel9MouseClicked
-
+ 
+    
+    
+    /* ****************************************************************
+    ***********************Search Button in Search Panel*************************
+    *******************************************************************
+    */
+    
+    
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         String SearchString = SearchTextField.getText();
          Client obj1 = new Client();
@@ -921,7 +1265,10 @@ public class Test extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this,"item isn't available");
         }                                            
     }//GEN-LAST:event_SearchButtonActionPerformed
-
+ /* ****************************************************************
+    ***********************Clear Button in Search Panel*************************
+    *******************************************************************
+    */
     private void clearsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearsearchActionPerformed
          SearchTable.setModel(new DefaultTableModel(null, new String[]{"Item Id","Name","Amount","Categorie", "Price" ,"Image"} ));// TODO add your handling code here:
     }//GEN-LAST:event_clearsearchActionPerformed
@@ -938,6 +1285,58 @@ public class Test extends javax.swing.JFrame {
         D1 = (DefaultTableModel) SearchTable.getModel();
         int index = SearchTable.getSelectedRow(); // TODO add your handling code here:
     }//GEN-LAST:event_SearchTableMouseClicked
+
+    private void orderhistorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderhistorybtnActionPerformed
+        // TODO add your handling code here:
+        orderhistorypanelbtn.setVisible(true);
+        trasactionpanel.setVisible(false);
+        populateOrderHistoryTable();
+    }//GEN-LAST:event_orderhistorybtnActionPerformed
+
+    private void transactionhistorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionhistorybtnActionPerformed
+        // TODO add your handling code here:
+        orderhistorypanelbtn.setVisible(false);
+        trasactionpanel.setVisible(true);
+        populateTransactionHistoryTable();
+    }//GEN-LAST:event_transactionhistorybtnActionPerformed
+
+    private void depositbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositbtnActionPerformed
+        // TODO add your handling code here:
+        
+        double amount = Double. parseDouble(depositfield.getText());
+        
+        Client c1 = new Client();
+        c1.depositCash(g_uname, amount);
+        
+        Vector<HashMap<String,String>> vec = c1.getAccountInfo(g_uname);
+        unamelabel.setText(vec.get(0).get(User_COLS.USER_NAME));
+        phonelabel.setText(vec.get(0).get(User_COLS.USER_PHONE));
+        emaillabel.setText(vec.get(0).get(User_COLS.USER_EMAIL));
+        balancelabel.setText(vec.get(0).get(User_COLS.USER_BAL));
+        JOptionPane.showMessageDialog(this,"Amount Deposited");
+    }//GEN-LAST:event_depositbtnActionPerformed
+
+    // EDIT QTY BTN in CART
+    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int qty = Integer.valueOf(qtyfield.getText());       // TODO add your handling code here:
+        Client c1 = new Client();
+        
+        cart_table = (DefaultTableModel)carttable.getModel();      // TODO add your handling code here:
+        int index = carttable.getSelectedRow();
+        
+        
+        boolean x = c1.editItemAtCart(g_uname, Integer.valueOf(cart_table.getValueAt(index, 0).toString()) , qty);
+        
+        if (!x){
+        JOptionPane.showMessageDialog(this,"Out of stock");
+        }
+        populateCart(g_uname);
+        qtyfield.setText("");
+        deletebtn.setEnabled(false);
+        
+      
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -984,22 +1383,31 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JTextField SearchTextField;
     private javax.swing.JButton addtocartSearchPanel;
     private javax.swing.JButton addtocartbtn;
+    private javax.swing.JLabel balancelabel;
     private javax.swing.JPanel cartpanel;
     private javax.swing.JTable carttable;
     private javax.swing.JButton clearsearch;
     private javax.swing.JButton deletebtn;
+    private javax.swing.JButton depositbtn;
+    private javax.swing.JTextField depositfield;
+    private javax.swing.JLabel emaillabel;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1021,10 +1429,20 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton orderhistorybtn;
     private javax.swing.JPanel orderhistorypanel;
+    private javax.swing.JPanel orderhistorypanelbtn;
+    private javax.swing.JTable orderhistorytable;
+    private javax.swing.JLabel phonelabel;
     private javax.swing.JTextField qtyfield;
     private javax.swing.JLabel testlabel1;
     private javax.swing.JLabel testlabel2;
+    private javax.swing.JButton transactionhistorybtn;
+    private javax.swing.JTable transactionhistorytable;
+    private javax.swing.JPanel trasactionpanel;
+    private javax.swing.JLabel unamelabel;
     // End of variables declaration//GEN-END:variables
 }
