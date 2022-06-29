@@ -80,4 +80,3 @@ INSERT INTO item( Name, Amount_available, category, Img_URL, Price) VALUES
 ("Patch Pocket Long Sleeve Shirt - Dark Olive",7,"clothes","https://student.valuxapps.com/storage/uploads/products/1644375298PFm8i.14.jpg",225),
 ("BLUE FRESH & HIGH COLLECTION - Camel",11,"clothes","https://student.valuxapps.com/storage/uploads/products/1644372386y0SzM.4.jpg",110);
 
-select * from item;
