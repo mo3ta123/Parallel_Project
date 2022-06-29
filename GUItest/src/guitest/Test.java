@@ -51,7 +51,7 @@ public class Test extends javax.swing.JFrame {
     {
         Client obj = new Client();
         Vector<HashMap<String,String>> vec = obj.getMyCart(username);
-        String[] columnName = {"Item Id","Name","Amount","Categorie", "Total Price"};
+        String[] columnName = {"Item Id","Name","Amount","Categorie", "Total Price", "Image"};
         Object[][] rows = new Object[vec.size()][6];
         for(int i = 0 ; i < vec.size() ; i++)
         {
@@ -61,9 +61,35 @@ public class Test extends javax.swing.JFrame {
             rows[i][3] = vec.get(i).get(Items_COLS.category);
             rows[i][4] = String.valueOf( Double. parseDouble((vec.get(i).get(Items_COLS.Price))) * Double. parseDouble(vec.get(i).get(Cart_COLS.Amount)) );
             
+             if(vec.get(i).get(Items_COLS.Img_URL) != null)
+            {
+                try {
+                        URL url = new URL(vec.get(i).get(Items_COLS.Img_URL));
+                        image = ImageIO.read(url);
+                    } 
+                catch (IOException e) 
+                    {                   
+                    }                    
+                ImageIcon image1 = new ImageIcon(new ImageIcon(image).getImage()
+                .getScaledInstance(100, 100, Image.SCALE_SMOOTH) );
+                
+                rows[i][5] = image1;
+            }
+            else
+            {
+                rows[i][5] = null;
+            }
  
         }
-        DefaultTableModel model = new DefaultTableModel(rows, columnName);
+        DefaultTableModel model = new DefaultTableModel(rows, columnName){
+        @Override
+            public Class<?> getColumnClass(int column) {
+                return switch (column) {
+                    case 5 -> ImageIcon.class;
+                    default -> Object.class;
+                };
+            }
+        };
 
         carttable.setModel(model);
         carttable.setRowHeight(120);
@@ -117,7 +143,6 @@ public class Test extends javax.swing.JFrame {
 
         HomeTable.setModel(model);
         HomeTable.setRowHeight(120);
-        //HomeTable.getColumnModel().getColumn(5).setPreferredWidth(150);
     }
     
 
@@ -426,7 +451,7 @@ public class Test extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Byte.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Byte.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false
@@ -766,11 +791,25 @@ public class Test extends javax.swing.JFrame {
 
     private void HomeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeTableMouseClicked
         D1 = (DefaultTableModel) HomeTable.getModel();
-        int index = HomeTable.getSelectedRow();  // TODO add your handling code here:
+        int index = HomeTable.getSelectedRow();
+        // TODO add your handling code here:
     }//GEN-LAST:event_HomeTableMouseClicked
  
     private void addtocartbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtocartbtnActionPerformed
-
+        Client c1 = new Client();    
+        D1 = (DefaultTableModel) HomeTable.getModel();
+        int index = HomeTable.getSelectedRow();
+        boolean item_add = c1.editItemAtCart(g_uname , Integer.valueOf(D1.getValueAt(index, 0).toString()), 1);
+        
+        if(item_add)
+        {
+            JOptionPane.showMessageDialog(this,"item added");   
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Out of Stock");
+        }
+        
         
     }//GEN-LAST:event_addtocartbtnActionPerformed
 
@@ -853,38 +892,29 @@ public class Test extends javax.swing.JFrame {
                     catch (IOException e) 
                         {                   
                         }
-                /*JFrame f = new JFrame("Add an image to JFrame");
-                ImageIcon icon = new ImageIcon(image);
-                f.add(new JLabel(icon));
-                f.pack();
-                f.setVisible(true);
-                   /*JFrame frame = new JFrame();
-                    JTable tableimage = new JTable((TableModel) new ImageIcon(image));
-                    frame.getContentPane().add(tableimage, BorderLayout.CENTER);
-                    frame.setSize(300, 400);
-                    frame.setVisible(true);
-                    JPanel mainPanel = new JPanel(new BorderLayout());
-                    mainPanel.add(tableimage);
-                    frame.add(mainPanel);
-                    frame.setVisible(true);
-                JTable lblimage = new JTable();
-                    
-                ImageIcon image1 = new ImageIcon(new ImageIcon(image).getImage()
-                .getScaledInstance(150, 120, Image.SCALE_SMOOTH) );
+
+               ImageIcon image1 = new ImageIcon(new ImageIcon(image).getImage()
+                .getScaledInstance(100, 100, Image.SCALE_SMOOTH) );
                 
-                rows[i][5] = new JTable(icon);*/
-                }
-                else
-                {
-                    rows[i][5] = null;
-                }
+                rows[i][5] = image1;
             }
-            DefaultTableModel model = new DefaultTableModel(rows, columnName);
-            //TheModel model = new TheModel(rows, columnName);
+            else
+            {
+                rows[i][5] = null;
+            }
+        }
+            DefaultTableModel model = new DefaultTableModel(rows, columnName){
+                    @Override
+            public Class<?> getColumnClass(int column) {
+                return switch (column) {
+                    case 5 -> ImageIcon.class;
+                    default -> Object.class;
+                };
+            }
+        };
         
             SearchTable.setModel(model);
             SearchTable.setRowHeight(120);
-            //HomeTable.getColumnModel().getColumn(5).setPreferredWidth(150);
         }
         else
         {
