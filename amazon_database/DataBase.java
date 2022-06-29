@@ -122,11 +122,30 @@ public class DataBase {
     {
         return transaction.items_bought_list_all();
     }
+    
+    
+    
      public synchronized Vector<HashMap<String, String>> getAccountInfo(String userName){
         Vector<HashMap<String, String>> result = new Vector<HashMap<String, String>>();
         result.add(user.output_user(userName));
         return result;
     }
+   
+    public synchronized int getItemQuantity(int itemID){
+        HashMap<String, String> result = item.itemView(itemID);
+        if(result.isEmpty())
+            return -1;
+        else
+            return Integer.parseInt(result.get(Items_COLS.Amount_available));
+    }
+    public synchronized Vector<HashMap<String,String>> search(String searchString)
+    {
+       return item.searchItems(searchString);
+    }
+    public synchronized Vector<HashMap<String, String>> getAllItems(){
+        return item.getItems();
+    }
+    
     public static void main(String args[]){
         DataBase db = new DataBase();
         //db.addUser("Ahmed", "Pass1234", "test123wa123@hotmail.com", "0110203040");
@@ -140,5 +159,10 @@ public class DataBase {
         for(int i = 0; i < test.size(); i++){
             System.out.println(test.get(i).get(User_COLS.USER_NAME) +test.get(i).get(User_COLS.USER_TYPE)+ test.get(i).get(User_COLS.USER_BAL) + " " + test.get(i).get(User_COLS.USER_EMAIL) + test.get(i).get(User_COLS.USER_PASS) + test.get(i).get(User_COLS.USER_PHONE));
         }
+        test = db.getAllItems();
+        for(int i = 0; i < test.size(); i++){
+            System.out.println(test.get(i).get(Items_COLS.Item_ID) + test.get(i).get(Items_COLS.Name));
+        }
+        System.out.println(db.getItemQuantity(2));
     }
 }
