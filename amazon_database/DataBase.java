@@ -72,6 +72,12 @@ public class DataBase {
         return pass.equals(password);
         
     }
+    
+     public synchronized Vector<HashMap<String, String>> getAccountInfo(String userName){
+        Vector<HashMap<String, String>> result = new Vector<HashMap<String, String>>();
+        result.add(user.output_user(userName));
+        return result;
+    }
     public static void main(String args[]){
         DataBase db = new DataBase();
         //db.addUser("Ahmed", "Pass1234", "test123wa123@hotmail.com", "0110203040");
