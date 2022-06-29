@@ -120,6 +120,11 @@ public class DataBase {
     {
         return transaction.items_bought_list_all();
     }
+     public synchronized Vector<HashMap<String, String>> getAccountInfo(String userName){
+        Vector<HashMap<String, String>> result = new Vector<HashMap<String, String>>();
+        result.add(user.output_user(userName));
+        return result;
+    }
     public static void main(String args[]){
         DataBase db = new DataBase();
         //db.addUser("Ahmed", "Pass1234", "test123wa123@hotmail.com", "0110203040");
@@ -128,5 +133,10 @@ public class DataBase {
         db.depositBalance("Ahmed", 2510.2);
         System.out.println(db.getBalance("Ahmed"));
         System.out.println(db.isAdminExists("ADMIN", "xajfk"));
+        Vector<HashMap<String, String>> test;
+        test = db.getAccountInfo("Ahmed");
+        for(int i = 0; i < test.size(); i++){
+            System.out.println(test.get(i).get(User_COLS.USER_NAME) +test.get(i).get(User_COLS.USER_TYPE)+ test.get(i).get(User_COLS.USER_BAL) + " " + test.get(i).get(User_COLS.USER_EMAIL) + test.get(i).get(User_COLS.USER_PASS) + test.get(i).get(User_COLS.USER_PHONE));
+        }
     }
 }

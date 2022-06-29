@@ -85,12 +85,12 @@ public class User {
                 resultset = prestatement.executeQuery();
                 while(resultset.next()){
                     HashMap<String, String> map = new HashMap<String, String>();
-                    map.put(User_COLS.USER_ID, resultset.getString(User_COLS.USER_ID));
                     map.put(User_COLS.USER_BAL, resultset.getString(User_COLS.USER_BAL));
                     map.put(User_COLS.USER_NAME, resultset.getString(User_COLS.USER_NAME));
                     map.put(User_COLS.USER_PASS, resultset.getString(User_COLS.USER_PASS));
                     map.put(User_COLS.USER_PHONE, resultset.getString(User_COLS.USER_PHONE));
                     map.put(User_COLS.USER_TYPE, resultset.getString(User_COLS.USER_TYPE));
+                    map.put(User_COLS.USER_EMAIL, resultset.getString(User_COLS.USER_EMAIL));
                     result.add(map);
                 }
             }
@@ -106,12 +106,12 @@ public class User {
             prestatement.setString(1, u_Name);
             resultset = prestatement.executeQuery();
             if(resultset.next()){
+                map.put(User_COLS.USER_EMAIL, resultset.getString(User_COLS.USER_EMAIL));
                 map.put(User_COLS.USER_BAL, resultset.getString(User_COLS.USER_BAL));
                 map.put(User_COLS.USER_NAME, resultset.getString(User_COLS.USER_NAME));
                 map.put(User_COLS.USER_PASS, resultset.getString(User_COLS.USER_PASS));
                 map.put(User_COLS.USER_PHONE, resultset.getString(User_COLS.USER_PHONE));
                 map.put(User_COLS.USER_TYPE, resultset.getString(User_COLS.USER_TYPE));
-                map.put(User_COLS.USER_EMAIL, resultset.getString(User_COLS.USER_EMAIL));
             }
             return map;
         }
@@ -121,3 +121,4 @@ public class User {
         return map;
     }
 }
+    
