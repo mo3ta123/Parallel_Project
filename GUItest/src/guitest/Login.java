@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package guitest;
-import Project.client.Client;
+import client.Client;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
