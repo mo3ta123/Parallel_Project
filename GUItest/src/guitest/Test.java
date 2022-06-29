@@ -12,7 +12,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import org.xml.sax.Attributes;
 
 /**
@@ -51,9 +53,9 @@ public class Test extends javax.swing.JFrame {
                     }
                 JFrame f = new JFrame("Add an image to JFrame");
                 ImageIcon icon = new ImageIcon(image);
-                f.add(new JLabel(icon));
+                /*f.add(new JLabel(icon));
                 f.pack();
-                f.setVisible(true);
+                f.setVisible(true);*/
                    /*JFrame frame = new JFrame();
                     JTable tableimage = new JTable((TableModel) new ImageIcon(image));
                     frame.getContentPane().add(tableimage, BorderLayout.CENTER);
@@ -394,7 +396,22 @@ public class Test extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Byte.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         HomeTable.setRowHeight(30);
         HomeTable.setShowGrid(true);
         HomeTable.getTableHeader().setReorderingAllowed(false);
@@ -852,7 +869,7 @@ public class Test extends javax.swing.JFrame {
         else
         {
              JOptionPane.showMessageDialog(this,"item isn't available");
-        }//GEN-LAST:event_SearchButtonActionPerformed
+        }                                            
     }//GEN-LAST:event_SearchButtonActionPerformed
 
     private void clearsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearsearchActionPerformed

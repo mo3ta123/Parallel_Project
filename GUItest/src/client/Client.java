@@ -62,17 +62,26 @@ public class Client {
     
     public Vector<HashMap<String,String>> search(String searchString)
     {
-        Vector<HashMap<String,String>> items = new Vector<HashMap<String,String>>();
+        if(searchString.equals("essam"))
+        {
+            Vector<HashMap<String,String>> items = new Vector<HashMap<String,String>>();
 
-        HashMap<String,String> item1 = new HashMap<String,String>();
-        item1.put("Item_ID", "1");
-        item1.put("Name", "Camera");
-        item1.put("Amount_available", "20");
-        item1.put("category", "'Electronics'");
-        //item1.put("Img_URL", "https://egyptlaptop.com/images/detailed/31/1594281073_IMG_1384580.jpg");
-        item1.put("Price", "5000");
+            HashMap<String,String> item1 = new HashMap<String,String>();
+            item1.put("Item_ID", "1");
+            item1.put("Name", "Camera");
+            item1.put("Amount_available", "20");
+            item1.put("category", "'Electronics'");
+            //item1.put("Img_URL", "https://egyptlaptop.com/images/detailed/31/1594281073_IMG_1384580.jpg");
+            item1.put("Price", "5000");
 
-        items.add(item1);
-        return items;
+            items.add(item1);
+            return items;
+        }
+        else
+        {
+            return new Vector();
+            
+        }
+        
     }
 }
