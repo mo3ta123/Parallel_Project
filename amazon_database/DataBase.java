@@ -58,7 +58,7 @@ public class DataBase {
     }
     public synchronized void depositBalance(String userName, double amount)
     {
-        user.update_user(userName, "", amount, "");
+        transaction.transaction_input(userName, amount, Transaction_type.DEPOSIT, null);
     }
     public synchronized double getBalance(String userName){
         HashMap<String, String> result = user.output_user(userName);
