@@ -137,8 +137,8 @@ public void itemUpdate(int Item_ID,int Amount_available)
      Vector<HashMap<String,String>> result=new Vector<>();
      try 
     {
-        prestatement =connection.prepareStatement("select * from item where upper(name) like upper(\"?%\")");
-        prestatement.setString(1,searchString);
+        prestatement =connection.prepareStatement("select * from item where upper(name) like upper(?)");
+        prestatement.setString(1,searchString+"%");
         resultset=prestatement.executeQuery();
         while(resultset.next())
         {
@@ -186,3 +186,4 @@ public void itemUpdate(int Item_ID,int Amount_available)
  
  
 }
+
