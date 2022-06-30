@@ -36,14 +36,14 @@ public class Transaction {
             String formattedDate = myDateObj.format(myFormatObj);
             
             //record transaction
-            prestatement=connection.prepareStatement("insert into Transaction(User_ID,Transaction_date,money_Amount,Transaction_type)values(?,?,?,?)");
+            prestatement=connection.prepareStatement("insert into Transaction(user_name,Transaction_date,money_Amount,Transaction_type)values(?,?,?,?)");
             prestatement.setString(1, user_name);
             prestatement.setString(2,formattedDate);
             prestatement.setString(3,Double.toString(money_amount));
             prestatement.setString(4,transaction_type);
             prestatement.executeUpdate();
             //get transaction id
-            prestatement=connection.prepareStatement("select max(Transaction_ID)as "+Transaction_COLS.Transaction_ID+" from Transaction where User_ID=?");
+            prestatement=connection.prepareStatement("select max(Transaction_ID)as "+Transaction_COLS.Transaction_ID+" from Transaction where user_name=?");
             prestatement.setString(1,user_name);
             resultset=prestatement.executeQuery();
             String Transaction_ID="";
@@ -53,13 +53,13 @@ public class Transaction {
             }
             
             // get user balance
-            prestatement=connection.prepareStatement("select balance from  User  where user_ID=?");
+            prestatement=connection.prepareStatement("select balance from  User  where name=?");
             prestatement.setString(1, user_name);
             resultset=prestatement.executeQuery();
             //update user balance
             if(resultset.next()){
                 double balance= Double.parseDouble(resultset.getString("balance"));
-                prestatement=connection.prepareStatement("Update User set balance=? where user_ID=?");
+                prestatement=connection.prepareStatement("Update User set balance=? where name=?");
                 if (transaction_type.equals(Transaction_type.BUY)){
                     prestatement.setString(1,Double.toString(balance-money_amount));
                 }
@@ -92,7 +92,7 @@ public class Transaction {
                     
         } catch (SQLException ex) {
             //noting
-            System.out.println("Fail");
+           ex.printStackTrace();
         }
         
     }
@@ -160,9 +160,9 @@ public class Transaction {
     public Vector<HashMap<String,String>> items_bought_list_all(){
         Vector<HashMap<String,String>> result=new Vector<>();
         try {
-            prestatement =connection.prepareStatement("select t.User_Name i.item_id ,i.name,i.price,t.Transaction_date,h.amount \n" +
+            prestatement =connection.prepareStatement("select t.user_name,i.item_id ,i.name,i.price,t.Transaction_date,h.amount \n" +
                                                         "from item as i,transaction as t,holds as h\n" +
-                                                        "where i.item_id=h.item_id and t.Transaction_ID = h.Transaction_ID\n" +
+                                                        "where i.item_id=h.item_id  and t.Transaction_ID = h.Transaction_ID\n" +
                                                         "order by t.Transaction_date desc");
             resultset=prestatement.executeQuery();
             while(resultset.next()){
@@ -176,7 +176,7 @@ public class Transaction {
                 result.add(map);
             }
         } catch (SQLException ex) {
-            //nothing
+            ex.printStackTrace();
         }
         return result;
     }
