@@ -26,11 +26,11 @@ public class Transaction {
        }
     public void transaction_input(String user_name,double money_amount,String transaction_type,Vector<HashMap<String,String>> items_id){
         try {
-           /* prestatement =connection.prepareStatement("select * from User");
+           prestatement =connection.prepareStatement("select * from User");
             resultset=prestatement.executeQuery();
             ResultSetMetaData rsmetadata=resultset.getMetaData();
             int size=rsmetadata.getColumnCount();
-            */
+            
             LocalDateTime myDateObj = LocalDateTime.now();
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedDate = myDateObj.format(myFormatObj);
