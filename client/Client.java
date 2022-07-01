@@ -354,6 +354,46 @@ public Vector<HashMap<String,String>> search(String searchString)
 
 
     }
+    
+    
+    public String  pay(String userName)
+    {
+
+        setIP_ADDRESS();
+        String result = "";
+
+        try
+        {
+            // Setup Communication
+            Socket c = new Socket(IP_ADDRESS, 1234);
+            DataOutputStream dos = new DataOutputStream(c.getOutputStream());
+            DataInputStream dis = new DataInputStream(c.getInputStream());
+            ObjectOutputStream output = new ObjectOutputStream(dos);
+            ObjectInputStream input = new ObjectInputStream(dis);
+
+            // Ask server for Pay services
+            dos.writeUTF("pay");
+
+            // Send username
+            dos.writeUTF(userName);
+
+
+            // Wait for result
+            result = dis.readUTF();
+
+            // Close Communication
+            dos.close();
+            dis.close();
+            c.close();
+
+        } catch (IOException  ex)
+        {
+
+        }
+
+        return result;
+
+    }
 
 
 }
