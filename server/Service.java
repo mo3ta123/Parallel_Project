@@ -138,4 +138,18 @@ public class Service
         }
     }
     
+        public void getAccountInfo() {
+        try {
+            // Read user name
+            String userName = dis.readUTF();
+
+            output.writeObject( DB.getAccountInfo(userName) );
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
 }
