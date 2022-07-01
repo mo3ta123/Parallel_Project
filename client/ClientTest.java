@@ -52,7 +52,7 @@ public class ClientTest {
         System.out.println();
         System.out.println();
     
-  }
+
   
   /* Test Cases for get my cart */
 
@@ -87,6 +87,43 @@ public class ClientTest {
 
         System.out.println();
         System.out.println();
+  
+               
+        // Test Case for transaction history
+        Vector<HashMap<String,String>> clientObj4 = obj.getTransactionHistory("user");
 
+        for(int i =0 ; i<clientObj4.size() ; i++)
+        {
+            System.out.println(clientObj4.get(i).get(Transaction_COLS.Transaction_ID));
+            System.out.println(clientObj4.get(i).get(Transaction_COLS.Transaction_date));
+            System.out.println(clientObj4.get(i).get(Transaction_COLS.Transaction_type));
+            System.out.println(clientObj4.get(i).get(Transaction_COLS.money_Amount));
+            System.out.println("");
+        }
+
+        System.out.println();
+        System.out.println();
+
+       
+        // Test Case for Item BoughList
+        Vector<HashMap<String,String>> clientObj5 = obj.getItemBoughtList("user");
+        
+        for(int i =0 ; i<clientObj5.size() ; i++)
+        {
+            System.out.println(clientObj5.get(i).get(Items_COLS.Item_ID));
+            System.out.println(clientObj5.get(i).get(Items_COLS.Name));
+            System.out.println( clientObj5.get(i).get(Items_COLS.Price));
+            System.out.println(clientObj5.get(i).get(Transaction_COLS.Transaction_date));
+            System.out.println(clientObj5.get(i).get(Holds_COLS.Amount));
+            System.out.println("");
+        }
+
+        System.out.println();
+        System.out.println();
+        
+
+        
+
+  }
 
 }
