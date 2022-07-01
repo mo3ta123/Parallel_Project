@@ -13,7 +13,7 @@ public class ClientTest {
         Client obj = new Client();
 
 
-        /* Test cases for login && singup /
+        /* Test cases for login && singup */
 
 
         //False
