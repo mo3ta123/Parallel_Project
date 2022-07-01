@@ -54,7 +54,7 @@ public class ClientTest {
     
   }
   
-  /* Test Cases for get my cart /
+  /* Test Cases for get my cart */
 
         Vector<HashMap<String,String>> clientObj = obj.getMyCart("user");
         for(int i =0 ; i<clientObj.size() ; i++)
@@ -73,13 +73,13 @@ public class ClientTest {
         System.out.println();
 
 
-        / Test case for Deposit /
+        /* Test case for Deposit */
 
         obj.depositCash("user",60000);
 
 
 
-        / Tests for pay */
+        /* Tests for pay */
 
         System.out.println(obj.pay("user"));
 
