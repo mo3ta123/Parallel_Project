@@ -33,7 +33,7 @@ public class ClientTest {
 
 
 
-        / Test cases for Editing Items */
+        /* Test cases for Editing Items */
 
         //Test1
 
