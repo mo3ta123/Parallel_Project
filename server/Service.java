@@ -151,5 +151,18 @@ public class Service
         }
     }
 
+    public void depositCash() {
+        try {
+            // Read user name and amount of money to deposit
+            String userName = dis.readUTF();
+            String amount = dis.readUTF();
+
+            DB.depositBalance(userName, Double.parseDouble(amount));
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
 }
