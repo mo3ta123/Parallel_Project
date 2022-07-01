@@ -51,7 +51,38 @@ public class Service
             e.printStackTrace();
         }
     }
+    
+    private static String encryptPassword(String str, int n, int x)
+    {
+        int MAX = 26;
+        // Reduce x because rotation of length 26 is unnecessary
+        x = x % MAX;
 
+        char arr[] = str.toCharArray();
+
+        // calculate the frequency of characters
+        int freq[] = new int[MAX];
+        for (int i = 0; i < n; i++)
+            freq[arr[i] - 'a']++;
+
+        for (int i = 0; i < n; i++) {
+
+            if (freq[arr[i] - 'a'] % 2 == 0) {
+                // If the frequency of current character is even then increment it by x
+                int pos = (arr[i] - 'a' + x) % MAX;
+                arr[i] = (char)(pos + 'a');
+            }
+            else {
+                // Else decrement it by x
+                int pos = (arr[i] - 'a' - x);
+                if (pos < 0)
+                    pos += MAX;
+                arr[i] = (char)(pos + 'a');
+            }
+        }
+
+        return String.valueOf(arr);
+    }
     
     
     
