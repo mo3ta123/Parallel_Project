@@ -161,7 +161,59 @@ public class DataBase
             return 2;
         }
     }
+    
+    // Stub for Get all items
+    public synchronized Vector<HashMap<String,String>> getAllItems()
+    {
+        Vector<HashMap<String,String>> items = new Vector<HashMap<String,String>>();
 
+        HashMap<String,String> item1 = new HashMap<String,String>();
+        item1.put("Item_ID", "1");
+        item1.put("Name", "alaa");
+        item1.put("Amount_available", "20");
+        item1.put("category", "'Electronics'");
+        item1.put("Img_URL", "https://egyptlaptop.com/images/detailed/31/1594281073_IMG_1384580.jpg%22);
+        item1.put("Price", "5000");
+        item1.put(ServerDBConst.Cart_COLS.Amount, "100");
+
+        items.add(item1);
+
+        HashMap<String,String> item2 = new HashMap<String,String>();
+        item2.put("Item_ID", "2");
+        item2.put("Name", "reda");
+        item2.put("Amount_available", "10");
+        item2.put("category", "'Electronics'");
+        item2.put("Img_URL", "https://media.4rgos.it/i/Argos/9520608_R_Z001A?w=750&h=440&qlt=70%22);
+        item2.put("Price", "6000");
+        item2.put(ServerDBConst.Cart_COLS.Amount, "100");
+
+        items.add(item2);
+
+
+        return items;
+
+    }
+
+    // Stub for transaction History, get deposit and all buy transaction for specific user
+    public synchronized Vector<HashMap<String,String>> getTransactionHistory(String userName)
+    {
+        Vector<HashMap<String,String>> items = new Vector<HashMap<String,String>>();
+
+        HashMap<String,String> item1 = new HashMap<String,String>();
+        item1.put("Item_ID", "1");
+        item1.put("Name", "Transaction ya bro");
+        item1.put("Amount_available", "20");
+        item1.put("category", "'Electronics'");
+        item1.put("Img_URL", "https://egyptlaptop.com/images/detailed/31/1594281073_IMG_1384580.jpg%22);
+        item1.put("Price", "5000");
+        item1.put(ServerDBConst.Cart_COLS.Amount, "100");
+
+        items.add(item1);
+        return items;
+    }
+
+                  
+             
               
              
 }
