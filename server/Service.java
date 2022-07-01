@@ -113,5 +113,16 @@ public class Service
         }
     }
 
+    public void getInitialItems()
+    {
+        try {
+
+            output.writeObject( DB.getAllItems() );
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     
 }
