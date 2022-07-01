@@ -199,28 +199,38 @@ public class signUp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                        
+                                       
         // TODO add your handling code here:
         Client c2 = new Client();
+        if (pno.getText().toString().matches("[0-9]+")){
         boolean is_valid = c2.signUp(uname.getText().toString(), password.getText().toString(), email.getText().toString(),pno.getText().toString());
-        if (is_valid){
-        JOptionPane.showMessageDialog(this,"Account Created Successfully!");
-        this.setVisible(false);
-        new Test().setVisible(true);
-        }
-        else{
+            if(is_valid){
+            JOptionPane.showMessageDialog(this,"Account Created Successfully!");
+            this.setVisible(false);
+            new Login().setVisible(true);
+            }
+            else{
             JOptionPane.showMessageDialog(this,"User name already exist, please try another one");
             uname.setText("");
             password.setText("");
             email.setText("");
             pno.setText("");
             uname.requestFocus();
-            
+            }
+        }
+    
+        
+        else if(!pno.getText().toString().matches("[0-9]+")) {
+            JOptionPane.showMessageDialog(this,"Please enter a number");
+            uname.setText("");
+            password.setText("");
+            email.setText("");
+            pno.setText("");
+            uname.requestFocus();
+            }
         
         }
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
