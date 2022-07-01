@@ -154,6 +154,51 @@ public class ClientTest {
         System.out.println();
         System.out.println();
         
+// Test cases for Search
+        Vector<HashMap<String,String>> clientObj1 = obj.search("X");
+
+        for(int i =0 ; i<clientObj1.size() ; i++)
+        {
+            System.out.println(clientObj1.get(i).get(Items_COLS.Item_ID));
+            System.out.println(clientObj1.get(i).get(Items_COLS.Name));
+            System.out.println(clientObj1.get(i).get(Items_COLS.Amount_available));
+            System.out.println(clientObj1.elementAt(i).get(Items_COLS.category));
+            System.out.println(clientObj1.get(i).get(Items_COLS.Price) );
+            System.out.println("");
+        }
+
+        System.out.println();
+        System.out.println();
+
+        //Test case for Get initial items
+        Vector<HashMap<String,String>> clientObj3 = obj.getInitialItems();
+
+        for(int i =0 ; i<clientObj3.size() ; i++)
+        {
+            System.out.println(clientObj3.get(i).get(Items_COLS.Item_ID));
+            System.out.println(clientObj3.get(i).get(Items_COLS.Name));
+            System.out.println(clientObj3.get(i).get(Items_COLS.Amount_available));
+            System.out.println(clientObj3.elementAt(i).get(Items_COLS.category));
+            System.out.println(clientObj3.get(i).get(Items_COLS.Price) );
+            System.out.println("");
+        }
+
+        System.out.println();
+        System.out.println();
+
+// Test case for Get account info
+        Vector<HashMap<String,String>> clientObj2 = obj.getAccountInfo("user");
+
+        for(int i =0 ; i<clientObj2.size() ; i++)
+        {
+            System.out.println(clientObj2.elementAt(i).get(User_COLS.USER_NAME));
+            System.out.println(clientObj2.elementAt(i).get(User_COLS.USER_PHONE));
+            System.out.println(clientObj2.elementAt(i).get(User_COLS.USER_EMAIL));
+            System.out.println(clientObj2.elementAt(i).get(User_COLS.USER_BAL));
+        }
+
+        System.out.println();
+        System.out.println();
 
   }
 
