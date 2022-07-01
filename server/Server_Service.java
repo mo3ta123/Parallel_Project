@@ -59,4 +59,19 @@ public class Server_Service
         }
         return String.valueOf(arr);
     }
+    
+    public Vector<HashMap<String,String>> report_1_getAllItems()
+    {
+        return DB.getAllItems();
+    }
+
+    public Vector<HashMap<String,String>> report_2_getAllTransaction()
+    {
+        return DB.getAllTransactions();
+    }
+
+    public Vector<HashMap<String,String>> report_3_getAllItemBoughtList()
+    {
+        return DB.getAllItemBoughtList();
+    }
 }
