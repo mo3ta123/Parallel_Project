@@ -119,5 +119,49 @@ public class DataBase
 
         return items;
     }
+                  
+    // Stubs for editing Item at cart
+    public synchronized void removeCartItem(String userName, int itemID)
+    {
+        System.out.println("REMOVING ITEM");
+    }
+
+    public  synchronized  void addItemInCart(String userName,int ItemID , int quantity)
+    {
+        System.out.println("Adding Item");
+    }
+
+    public  synchronized  void updateCartQuantity(String userName,int ItemID , int quantity)
+    {
+        System.out.println("updating item");
+    }
+
+
+    public synchronized boolean isItemExistsInCart(String userName, int ItemID)
+    {
+        if(userName.equals("user"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    // from item table
+    public synchronized int getItemQuantity(int itemID)
+    {
+        if(itemID == 1)
+        {
+            return 5;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+
+              
              
 }
