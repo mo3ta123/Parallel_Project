@@ -84,6 +84,34 @@ public class Service
         return String.valueOf(arr);
     }
     
-    
+        public void signUp()
+    {
+        try {
+            // Read user name and password
+            String userName = dis.readUTF();
+            String Password = dis.readUTF();
+            String email = dis.readUTF();
+            String phoneNumber = dis.readUTF();
+
+            // Check that the user already exists
+            boolean userExists = DB.doesUserExist(userName);
+
+            if(!userExists)
+            {
+                // Save user name and encrypted password in database
+                DB.addUser(userName, encryptPassword(Password,Password.length(),3) , email ,phoneNumber);
+                dos.writeUTF("validSignUp");
+
+            }
+            else
+            {
+                dos.writeUTF("invalidSignUp");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     
 }
