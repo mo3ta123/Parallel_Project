@@ -119,6 +119,48 @@ public class Client
         }
 
     }
+    
+    
+    public Vector<HashMap<String,String>> getInitialItems()
+    {
+        setIP_ADDRESS();
+        Vector<HashMap<String,String>> initialItems = new Vector<>();
+        try
+        {
+            // Setup Communication
+            Socket c = new Socket(IP_ADDRESS, 1234);
+            DataOutputStream dos = new DataOutputStream(c.getOutputStream());
+            DataInputStream dis = new DataInputStream(c.getInputStream());
+            ObjectOutputStream output = new ObjectOutputStream(dos);
+            ObjectInputStream input = new ObjectInputStream(dis);
+
+            // Ask server for signUp services
+            dos.writeUTF("getInitialItems");
+
+
+
+            // Wait for result
+            initialItems = (Vector<HashMap<String,String>>) input.readObject();
+
+
+            // Close Communication
+            dos.close();
+            dis.close();
+            c.close();
+
+        } catch (IOException  ex)
+        {
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return initialItems;
+    }
+
+    
+    
+    
 
     
 }
