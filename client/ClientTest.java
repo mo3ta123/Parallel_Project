@@ -53,6 +53,40 @@ public class ClientTest {
         System.out.println();
     
   }
+  
+  /* Test Cases for get my cart /
+
+        Vector<HashMap<String,String>> clientObj = obj.getMyCart("user");
+        for(int i =0 ; i<clientObj.size() ; i++)
+        {
+            System.out.println(clientObj.elementAt(i).get("Item_ID"));
+            System.out.println(clientObj.elementAt(i).get("Name"));
+            System.out.println(clientObj.elementAt(i).get("Amount_available"));
+            System.out.println(clientObj.elementAt(i).get("category"));
+            System.out.println(clientObj.elementAt(i).get("Img_URL"));
+            System.out.println(clientObj.elementAt(i).get("Price"));
+            System.out.println(clientObj.elementAt(i).get("Amount"));
+            System.out.println();
+        }
+
+        System.out.println();
+        System.out.println();
+
+
+        / Test case for Deposit /
+
+        obj.depositCash("user",60000);
+
+
+
+        / Tests for pay */
+
+        System.out.println(obj.pay("user"));
+
+
+
+        System.out.println();
+        System.out.println();
 
 
 }
