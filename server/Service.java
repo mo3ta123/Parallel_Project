@@ -178,4 +178,59 @@ public class Service
 
     }
     
+        public void pay()
+    {
+        try {
+            // Read user name
+            String userName = dis.readUTF();
+
+            double balance = DB.getBalance(userName);
+            double totalPayment = 0;
+
+            Vector<HashMap<String,String>> cartItems = DB.getMyCart(userName);
+
+            String invalidItems = "";
+
+            for (int i = 0; i < cartItems.size(); i++)
+            {
+                if(Integer.parseInt(cartItems.get(i).get(ServerDBConst.Cart_COLS.Amount) ) > Integer.parseInt(cartItems.get(i).get(ServerDBConst.Items_COLS.Amount_available)))
+                {
+                    invalidItems += "Item:" + cartItems.get(i).get(ServerDBConst.Items_COLS.Name)
+                                    + " ,Available: " + cartItems.get(i).get(ServerDBConst.Items_COLS.Amount_available) +
+                                    ", Requested: " + cartItems.get(i).get(ServerDBConst.Cart_COLS.Amount) + "\n";
+                }
+                else
+                {
+                    totalPayment += Integer.parseInt(cartItems.get(i).get(ServerDBConst.Items_COLS.Price) ) * Integer.parseInt(cartItems.get(i).get(ServerDBConst.Cart_COLS.Amount));
+                }
+            }
+                    
+             if(cartItems.isEmpty() )
+            {
+                dos.writeUTF("Cart Is Empty");
+            }
+             else if(invalidItems.equals("") && totalPayment <= balance)
+            {
+                DB.clearCart(userName);
+                DB.makeTransaction(userName,totalPayment, ServerDBConst.Transaction_type.BUY,cartItems);
+                dos.writeUTF("Valid Payment");
+
+            }
+            else if( !(invalidItems.equals("")))
+            {
+                dos.writeUTF(invalidItems);
+            }
+            else if( totalPayment > balance )
+            {
+                dos.writeUTF("Insufficient Balance");
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
