@@ -306,6 +306,55 @@ public Vector<HashMap<String,String>> search(String searchString)
         return searchedOutput;
     }
 
-    
+        public boolean editItemAtCart(String userName , int itemID, int quantity)
+    {
+
+        setIP_ADDRESS();
+        String result = "RejectedQuantity";
+        String strQuantity = String.valueOf(quantity);
+        try
+        {
+            // Setup Communication
+            Socket c = new Socket(IP_ADDRESS, 1234);
+            DataOutputStream dos = new DataOutputStream(c.getOutputStream());
+            DataInputStream dis = new DataInputStream(c.getInputStream());
+            ObjectOutputStream output = new ObjectOutputStream(dos);
+            ObjectInputStream input = new ObjectInputStream(dis);
+
+            // Ask server for Edit services
+            dos.writeUTF("editItemAtCart");
+
+            // Send username and password
+            dos.writeUTF(userName);
+            dos.writeUTF(String.valueOf(itemID));
+            dos.writeUTF(strQuantity);
+
+            // Wait for result
+            result = dis.readUTF();
+
+
+            // Close Communication
+            dos.close();
+            dis.close();
+            c.close();
+
+        } catch (IOException  ex)
+        {
+
+        }
+
+        if ( result.equals("AcceptedQuantity") )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
+    }
+
+
 }
 
