@@ -256,6 +256,25 @@ public class DataBase
     {
 
     }
+ // stub for admin login   ,where  userName like , password like  AND TYPE LIKE ADMIN
+    public synchronized boolean isAdminExists(String userName , String password)
+    {
+        // save this admin in database(pass after encryption) :  userName:ADMIN    Pass:xajfk  type admin
+        // In GUI :   userName:ADMIN    Pass:admin
+
+        return true;
+    }
+
+    // Stub for report
+    public synchronized Vector<HashMap<String,String>> getAllTransactions()
+    {
+        return new Vector<>();
+    }
+
+    public synchronized Vector<HashMap<String,String>> getAllItemBoughtList()
+    {
+        return new Vector<>();
+    }
           
              
 }
