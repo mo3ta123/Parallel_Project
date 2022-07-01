@@ -124,5 +124,18 @@ public class Service
         }
     }
 
+    public void getMyCart()
+    {
+        try {
+            // Read user name
+            String userName = dis.readUTF();
+
+            output.writeObject( DB.getMyCart(userName) );
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     
 }
