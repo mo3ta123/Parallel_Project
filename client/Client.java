@@ -433,6 +433,46 @@ public Vector<HashMap<String,String>> search(String searchString)
 
         return TransactionHistory;
     }
+    
+    
+    public Vector<HashMap<String,String>> getItemBoughtList(String userName)
+    {
+        setIP_ADDRESS();
+        Vector<HashMap<String,String>> itemBoughtList = new Vector<>();
+        try
+        {
+            // Setup Communication
+            Socket c = new Socket(IP_ADDRESS, 1234);
+            DataOutputStream dos = new DataOutputStream(c.getOutputStream());
+            DataInputStream dis = new DataInputStream(c.getInputStream());
+            ObjectOutputStream output = new ObjectOutputStream(dos);
+            ObjectInputStream input = new ObjectInputStream(dis);
+
+            // Ask server for signUp services
+            dos.writeUTF("getItemBoughtList");
+
+            // Send username
+            dos.writeUTF(userName);
+
+            // Wait for result
+            itemBoughtList = (Vector<HashMap<String,String>>) input.readObject();
+
+
+            // Close Communication
+            dos.close();
+            dis.close();
+            c.close();
+
+        } catch (IOException  ex)
+        {
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return itemBoughtList;
+
+    }
 
 
 }
