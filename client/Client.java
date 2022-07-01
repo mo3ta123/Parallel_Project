@@ -236,6 +236,39 @@ public Vector<HashMap<String,String>> getMyCart(String userName)
 
     }
 
+public void depositCash(String userName,double value)
+    {
+        setIP_ADDRESS();
+
+        try
+        {
+            // Setup Communication
+            Socket c = new Socket(IP_ADDRESS, 1234);
+            DataOutputStream dos = new DataOutputStream(c.getOutputStream());
+            DataInputStream dis = new DataInputStream(c.getInputStream());
+            ObjectOutputStream output = new ObjectOutputStream(dos);
+            ObjectInputStream input = new ObjectInputStream(dis);
+
+            // Ask server for signUp services
+            dos.writeUTF("depositCash");
+
+            // Send username and password
+            dos.writeUTF(userName);
+            dos.writeUTF(String.valueOf(value));
+
+
+            // Close Communication
+            dos.close();
+            dis.close();
+            c.close();
+
+        } catch (IOException  ex)
+        {
+
+        }
+
+    }
+
 
 
     
