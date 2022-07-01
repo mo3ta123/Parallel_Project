@@ -275,5 +275,34 @@ public class Service
             e.printStackTrace();
         }
     }
+    
+    
+    public void getTransactionHistory()
+    {
+        try {
+            // Read user searched item
+            String userName = dis.readUTF();
+
+            output.writeObject( DB.getTransactionHistory(userName) );
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void getItemBoughtList()
+    {
+        try {
+            // Read user searched item
+            String userName = dis.readUTF();
+
+            output.writeObject( DB.getItemBoughtList(userName) );
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }
