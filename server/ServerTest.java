@@ -35,8 +35,43 @@ public static void main(String[] args)
 
         System.out.println();
         System.out.println();
-  
-}
+        
+           
+        Vector<HashMap<String,String>> clientObj4 = obj.report_2_getAllTransaction();
+
+        for(int i =0 ; i<clientObj4.size() ; i++)
+        {
+            System.out.println(clientObj4.get(i).get(ServerDBConst.Transaction_COLS.Transaction_ID));
+            System.out.println(clientObj4.get(i).get(ServerDBConst.Transaction_COLS.Transaction_date));
+            System.out.println(clientObj4.get(i).get(ServerDBConst.Transaction_COLS.Transaction_type));
+            System.out.println(clientObj4.get(i).get(ServerDBConst.Transaction_COLS.money_Amount));
+            System.out.println("");
+        }
+
+        System.out.println();
+        System.out.println();
+
+      
+        Vector<HashMap<String,String>> clientObj5 = obj.report_3_getAllItemBoughtList();
+        
+        System.out.println(clientObj5.isEmpty());
+        
+        for(int i =0 ; i<clientObj5.size() ; i++)
+        {
+            System.out.println(clientObj5.get(i).get(ServerDBConst.Transaction_COLS.User_Name));
+            System.out.println(clientObj5.get(i).get(ServerDBConst.Items_COLS.Item_ID));
+            System.out.println(clientObj5.get(i).get(ServerDBConst.Items_COLS.Name));
+            System.out.println( clientObj5.get(i).get(ServerDBConst.Items_COLS.Price));
+            System.out.println(clientObj5.get(i).get(ServerDBConst.Transaction_COLS.Transaction_date));
+            System.out.println(clientObj5.get(i).get(ServerDBConst.Holds_COLS.Amount));
+            System.out.println("");
+        }
+
+        System.out.println();
+        System.out.println();
+        
+
+ }
 
 
 }
