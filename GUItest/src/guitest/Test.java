@@ -28,22 +28,21 @@ public class Test extends javax.swing.JFrame {
     DefaultTableModel D1;
     DefaultTableModel cart_table;
     Image image = null;
-    String g_uname;
+    String g_uname ;
     
     
-    public Test() {
+     public Test() {
      initComponents();
     }
 
     public Test(String username) {
-        initComponents();
+        initComponents();     
+        //trasactionpanel.setVisible(false);
         HomePanel.setVisible(false);
         cartpanel.setVisible(false);
-        orderhistorypanel.setVisible(false);
-        SearchPanel.setVisible(false);
-        
+        userinformatoinpanel.setVisible(false);
+        SearchPanel.setVisible(false);        
         g_uname = username;
-
     }
     
     public void populateTransactionHistoryTable()
@@ -57,14 +56,17 @@ public class Test extends javax.swing.JFrame {
             rows[i][0] = vec.get(i).get(Transaction_COLS.Transaction_ID);
             rows[i][1] = vec.get(i).get(Transaction_COLS.Transaction_date);
             rows[i][2] = vec.get(i).get(Transaction_COLS.Transaction_type);
-            rows[i][3] = vec.get(i).get(Transaction_COLS.money_Amount);
-            
-            
-            
+            rows[i][3] = vec.get(i).get(Transaction_COLS.money_Amount);     
         }
-        DefaultTableModel model = new DefaultTableModel(rows, columnName);
-
-        transactionhistorytable.setModel(model);
+        DefaultTableModel model = new DefaultTableModel(rows, columnName){
+                    @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
+        };
+        userInfo.setModel(model);
+        userInfo.getTableHeader().setReorderingAllowed(false);
+        userInfo.getTableHeader().setResizingAllowed(false);
     }
     
     
@@ -80,13 +82,18 @@ public class Test extends javax.swing.JFrame {
             rows[i][1] = vec.get(i).get(Items_COLS.Name);
             rows[i][2] = vec.get(i).get(Items_COLS.Price);
             rows[i][3] = vec.get(i).get(Transaction_COLS.Transaction_date);
-            rows[i][4] = vec.get(i).get(Holds_COLS.Amount);
-            
-            
+            rows[i][4] = vec.get(i).get(Holds_COLS.Amount);    
         }
-        DefaultTableModel model = new DefaultTableModel(rows, columnName);
-
-        orderhistorytable.setModel(model);
+        DefaultTableModel model = new DefaultTableModel(rows, columnName){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
+        };
+        userInfo.setModel(model);
+        userInfo.getColumnModel().getColumn(1).setPreferredWidth(userInfo.getColumnModel().getColumn(1).getPreferredWidth()+100);
+        userInfo.getTableHeader().setReorderingAllowed(false);
+        userInfo.getTableHeader().setResizingAllowed(false);
     }
     
     
@@ -100,7 +107,7 @@ public class Test extends javax.swing.JFrame {
     {
         Client obj = new Client();
         Vector<HashMap<String,String>> vec = obj.getMyCart(username);
-        String[] columnName = {"Item Id","Name","Amount","Categorie", "Total Price", "Image"};
+        String[] columnName = {"Item Id","Name","Amount","Category", "Total Price", "Image"};
         Object[][] rows = new Object[vec.size()][6];
         for(int i = 0 ; i < vec.size() ; i++)
         {
@@ -138,10 +145,16 @@ public class Test extends javax.swing.JFrame {
                     default -> Object.class;
                 };
             }
+        @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
+            
         };
-
         carttable.setModel(model);
         carttable.setRowHeight(120);
+        carttable.getTableHeader().setReorderingAllowed(false);
+        carttable.getTableHeader().setResizingAllowed(false);
     }
     
     
@@ -153,8 +166,9 @@ public class Test extends javax.swing.JFrame {
  public void populateJTable()
     {
         Client obj = new Client();
+        
         Vector<HashMap<String,String>> vec = obj.getInitialItems();
-        String[] columnName = {"Item Id","Name","Amount","Categorie", "Price" ,"Image"};
+        String[] columnName = {"Item Id","Name","Amount","Category", "Price" ,"Image"};
         Object[][] rows = new Object[vec.size()][6];
         for(int i = 0 ; i < vec.size() ; i++)
         {
@@ -191,10 +205,15 @@ public class Test extends javax.swing.JFrame {
                     default -> Object.class;
                 };
             }
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+    }
         };
-
         HomeTable.setModel(model);
         HomeTable.setRowHeight(120);
+        HomeTable.getTableHeader().setReorderingAllowed(false);
+        HomeTable.getTableHeader().setResizingAllowed(false);
     }
     
 
@@ -245,7 +264,7 @@ public class Test extends javax.swing.JFrame {
         qtyfield = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        orderhistorypanel = new javax.swing.JPanel();
+        userinformatoinpanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         unamelabel = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -262,11 +281,8 @@ public class Test extends javax.swing.JFrame {
         orderhistorybtn = new javax.swing.JButton();
         transactionhistorybtn = new javax.swing.JButton();
         orderhistorypanelbtn = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        orderhistorytable = new javax.swing.JTable();
-        trasactionpanel = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        transactionhistorytable = new javax.swing.JTable();
+        userInfo = new javax.swing.JTable();
         SearchPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         SearchTable = new javax.swing.JTable();
@@ -286,6 +302,7 @@ public class Test extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-market-64.png"))); // NOI18N
         jLabel9.setText("Amazon");
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 60));
 
@@ -306,6 +323,7 @@ public class Test extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-home-20.png"))); // NOI18N
         jLabel10.setText("Home");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -339,6 +357,7 @@ public class Test extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-search-20 (1).png"))); // NOI18N
         jLabel8.setText("Search");
 
         testlabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -377,6 +396,7 @@ public class Test extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-add-shopping-cart-20.png"))); // NOI18N
         jLabel4.setText("Your Cart");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -412,7 +432,8 @@ public class Test extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("User Information");
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-order-history-20.png"))); // NOI18N
+        jLabel6.setText("MY Account");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -447,6 +468,7 @@ public class Test extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-logout-20.png"))); // NOI18N
         jLabel2.setText("Logout");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -565,6 +587,7 @@ public class Test extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guitest/imgs/icons8-home-20.png"))); // NOI18N
         jLabel15.setText("Home");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -666,7 +689,7 @@ public class Test extends javax.swing.JFrame {
                         .addComponent(qtyfield, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
@@ -674,10 +697,9 @@ public class Test extends javax.swing.JFrame {
         cartpanelLayout.setVerticalGroup(
             cartpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cartpanelLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(cartpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(cartpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -767,7 +789,7 @@ public class Test extends javax.swing.JFrame {
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addComponent(orderhistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(transactionhistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(transactionhistorybtn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(83, 83, 83)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
@@ -796,14 +818,14 @@ public class Test extends javax.swing.JFrame {
                         .addComponent(depositfield, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(depositbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addContainerGap(23, Short.MAX_VALUE)
+                        .addContainerGap(46, Short.MAX_VALUE)
                         .addComponent(jLabel23)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -836,34 +858,7 @@ public class Test extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
-        orderhistorytable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Item ID", "Name ", "Price", "Date", "Amount Bought"
-            }
-        ));
-        jScrollPane4.setViewportView(orderhistorytable);
-
-        javax.swing.GroupLayout orderhistorypanelbtnLayout = new javax.swing.GroupLayout(orderhistorypanelbtn);
-        orderhistorypanelbtn.setLayout(orderhistorypanelbtnLayout);
-        orderhistorypanelbtnLayout.setHorizontalGroup(
-            orderhistorypanelbtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(orderhistorypanelbtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4)
-                .addContainerGap())
-        );
-        orderhistorypanelbtnLayout.setVerticalGroup(
-            orderhistorypanelbtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(orderhistorypanelbtnLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        transactionhistorytable.setModel(new javax.swing.table.DefaultTableModel(
+        userInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -871,52 +866,41 @@ public class Test extends javax.swing.JFrame {
                 "Transaction ID", "Date", "Type", "Amount"
             }
         ));
-        jScrollPane5.setViewportView(transactionhistorytable);
+        jScrollPane5.setViewportView(userInfo);
 
-        javax.swing.GroupLayout trasactionpanelLayout = new javax.swing.GroupLayout(trasactionpanel);
-        trasactionpanel.setLayout(trasactionpanelLayout);
-        trasactionpanelLayout.setHorizontalGroup(
-            trasactionpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(trasactionpanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
-                .addContainerGap())
+        javax.swing.GroupLayout orderhistorypanelbtnLayout = new javax.swing.GroupLayout(orderhistorypanelbtn);
+        orderhistorypanelbtn.setLayout(orderhistorypanelbtnLayout);
+        orderhistorypanelbtnLayout.setHorizontalGroup(
+            orderhistorypanelbtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
         );
-        trasactionpanelLayout.setVerticalGroup(
-            trasactionpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(trasactionpanelLayout.createSequentialGroup()
+        orderhistorypanelbtnLayout.setVerticalGroup(
+            orderhistorypanelbtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(orderhistorypanelbtnLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout orderhistorypanelLayout = new javax.swing.GroupLayout(orderhistorypanel);
-        orderhistorypanel.setLayout(orderhistorypanelLayout);
-        orderhistorypanelLayout.setHorizontalGroup(
-            orderhistorypanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(orderhistorypanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(orderhistorypanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(orderhistorypanelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(trasactionpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+        javax.swing.GroupLayout userinformatoinpanelLayout = new javax.swing.GroupLayout(userinformatoinpanel);
+        userinformatoinpanel.setLayout(userinformatoinpanelLayout);
+        userinformatoinpanelLayout.setHorizontalGroup(
+            userinformatoinpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userinformatoinpanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(orderhistorypanelbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        orderhistorypanelLayout.setVerticalGroup(
-            orderhistorypanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(orderhistorypanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+        userinformatoinpanelLayout.setVerticalGroup(
+            userinformatoinpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(userinformatoinpanelLayout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(22, 22, 22)
                 .addComponent(orderhistorypanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(orderhistorypanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(orderhistorypanelLayout.createSequentialGroup()
-                    .addGap(263, 263, 263)
-                    .addComponent(trasactionpanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGap(10, 10, 10)))
         );
 
-        getContentPane().add(orderhistorypanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 600));
+        getContentPane().add(userinformatoinpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, 690, 600));
 
         SearchPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1041,11 +1025,9 @@ public class Test extends javax.swing.JFrame {
     HomePanel.setVisible(true);
     populateJTable();
     cartpanel.setVisible(false);
-    orderhistorypanel.setVisible(false);
+    userinformatoinpanel.setVisible(false);
     SearchPanel.setVisible(false);
-        // TODO add your handling code here:
-
-       
+    //trasactionpanel.setVisible(false);  
     }//GEN-LAST:event_jPanel6MouseClicked
 
     
@@ -1056,9 +1038,11 @@ public class Test extends javax.swing.JFrame {
     
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
     HomePanel.setVisible(false);
+    //trasactionpanel.setVisible(false);
     cartpanel.setVisible(false);
-    orderhistorypanel.setVisible(false);
-    SearchPanel.setVisible(true);// TODO add your handling code here:
+    userinformatoinpanel.setVisible(false);
+    SearchPanel.setVisible(true);
+    // TODO add your handling code here:
     }//GEN-LAST:event_jPanel5MouseClicked
 
     private void jPanel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MousePressed
@@ -1112,7 +1096,10 @@ public class Test extends javax.swing.JFrame {
     }//GEN-LAST:event_carttableMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        Client c1 = new Client();
+        String message = c1.pay(g_uname);
+        JOptionPane.showMessageDialog(this, message);
+        populateCart(g_uname);   // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
      /* ****************************************************************
@@ -1139,7 +1126,8 @@ public class Test extends javax.swing.JFrame {
     
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
        HomePanel.setVisible(false);
-       orderhistorypanel.setVisible(false);
+       //trasactionpanel.setVisible(false);
+       userinformatoinpanel.setVisible(false);
        SearchPanel.setVisible(false);
        cartpanel.setVisible(true);
        deletebtn.setEnabled(false);
@@ -1156,13 +1144,12 @@ public class Test extends javax.swing.JFrame {
     */
     
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
-        orderhistorypanel.setVisible(true);   
+        userinformatoinpanel.setVisible(true);   
         HomePanel.setVisible(false);
         cartpanel.setVisible(false);
         SearchPanel.setVisible(false);// TODO add your handling code here:
-        
         orderhistorypanelbtn.setVisible(false);
-        trasactionpanel.setVisible(false);
+        orderhistorypanelbtn.setVisible(false);
         
         
         Client c1 = new Client();
@@ -1216,7 +1203,7 @@ public class Test extends javax.swing.JFrame {
          Vector<HashMap<String,String>> clientObj1 = obj1.search(SearchString);
          if(!(clientObj1.isEmpty()))
         {
-            String[] columnName = {"Item Id","Name","Amount","Categorie", "Price" ,"Image"};
+            String[] columnName = {"Item Id","Name","Amount","Category", "Price" ,"Image"};
             Object[][] rows = new Object[clientObj1.size()][6];
             for(int i = 0 ; i < clientObj1.size() ; i++)
             {
@@ -1254,10 +1241,16 @@ public class Test extends javax.swing.JFrame {
                     default -> Object.class;
                 };
             }
+            @Override
+            public boolean isCellEditable(int row, int column) {
+            return false;
+            }
         };
         
             SearchTable.setModel(model);
             SearchTable.setRowHeight(120);
+            SearchTable.getTableHeader().setReorderingAllowed(false);
+            SearchTable.getTableHeader().setResizingAllowed(false);
         }
         else
         {
@@ -1269,11 +1262,23 @@ public class Test extends javax.swing.JFrame {
     *******************************************************************
     */
     private void clearsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearsearchActionPerformed
-         SearchTable.setModel(new DefaultTableModel(null, new String[]{"Item Id","Name","Amount","Categorie", "Price" ,"Image"} ));// TODO add your handling code here:
+         SearchTable.setModel(new DefaultTableModel(null, new String[]{"Item Id","Name","Amount","Category", "Price" ,"Image"} ));// TODO add your handling code here:
     }//GEN-LAST:event_clearsearchActionPerformed
 
     private void addtocartSearchPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addtocartSearchPanelActionPerformed
-    
+        Client c1 = new Client();    
+        D1 = (DefaultTableModel) SearchTable.getModel();
+        int index = SearchTable.getSelectedRow();
+        boolean item_add = c1.editItemAtCart(g_uname , Integer.valueOf(D1.getValueAt(index, 0).toString()), 1);
+        
+        if(item_add)
+        {
+            JOptionPane.showMessageDialog(this,"item added");   
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this,"Out of Stock");
+        }
     }//GEN-LAST:event_addtocartSearchPanelActionPerformed
 
     private void SearchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextFieldActionPerformed
@@ -1288,14 +1293,12 @@ public class Test extends javax.swing.JFrame {
     private void orderhistorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderhistorybtnActionPerformed
         // TODO add your handling code here:
         orderhistorypanelbtn.setVisible(true);
-        trasactionpanel.setVisible(false);
         populateOrderHistoryTable();
     }//GEN-LAST:event_orderhistorybtnActionPerformed
 
     private void transactionhistorybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionhistorybtnActionPerformed
-        // TODO add your handling code here:
-        orderhistorypanelbtn.setVisible(false);
-        trasactionpanel.setVisible(true);
+
+        orderhistorypanelbtn.setVisible(true);
         populateTransactionHistoryTable();
     }//GEN-LAST:event_transactionhistorybtnActionPerformed
 
@@ -1333,7 +1336,6 @@ public class Test extends javax.swing.JFrame {
         populateCart(g_uname);
         qtyfield.setText("");
         deletebtn.setEnabled(false);
-        //uwu
         
       
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -1429,20 +1431,17 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton orderhistorybtn;
-    private javax.swing.JPanel orderhistorypanel;
     private javax.swing.JPanel orderhistorypanelbtn;
-    private javax.swing.JTable orderhistorytable;
     private javax.swing.JLabel phonelabel;
     private javax.swing.JTextField qtyfield;
     private javax.swing.JLabel testlabel1;
     private javax.swing.JLabel testlabel2;
     private javax.swing.JButton transactionhistorybtn;
-    private javax.swing.JTable transactionhistorytable;
-    private javax.swing.JPanel trasactionpanel;
     private javax.swing.JLabel unamelabel;
+    private javax.swing.JTable userInfo;
+    private javax.swing.JPanel userinformatoinpanel;
     // End of variables declaration//GEN-END:variables
 }
