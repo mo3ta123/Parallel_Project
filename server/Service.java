@@ -165,4 +165,17 @@ public class Service
         }
     }
     
+    public void search() {
+        try {
+            // Read user searched item
+            String searchString = dis.readUTF();
+
+            output.writeObject( DB.search(searchString) );
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
 }
