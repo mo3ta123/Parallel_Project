@@ -12,21 +12,39 @@ import java.util.concurrent.Executors;
 public class Server implements Runnable
 {
 
+    @Override
+    public void run()
+    {
+        DataBase DB = new DataBase();
+
+        try
+        {
+            ExecutorService executor = Executors.newFixedThreadPool(50);
+
+            ServerSocket s = new ServerSocket(1234);
+            while (true)
+            {
+
+                Socket c = s.accept();
+
+                ClientHandler ch = new ClientHandler(c,DB);
+                executor.execute(ch);
 
 
+            }
 
+            //s.close();
+        }
+        catch (EOFException eofException)
+        {
+            eofException.printStackTrace();
+        }
+        catch (IOException ioException)
+        {
+            ioException.printStackTrace();
+        }
 
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 
