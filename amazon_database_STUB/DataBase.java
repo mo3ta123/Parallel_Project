@@ -214,6 +214,48 @@ public class DataBase
 
                   
              
-              
+        // Stub for all bought item for specific user
+    public synchronized Vector<HashMap<String,String>> getItemBoughtList(String userName)
+    {
+        Vector<HashMap<String,String>> items = new Vector<HashMap<String,String>>();
+
+        HashMap<String,String> item1 = new HashMap<String,String>();
+        item1.put("Item_ID", "1");
+        item1.put("Name", "Item Bought List");
+        item1.put("Amount_available", "20");
+        item1.put("category", "'Electronics'");
+        item1.put("Img_URL", "https://egyptlaptop.com/images/detailed/31/1594281073_IMG_1384580.jpg");
+        item1.put("Price", "5000");
+        item1.put(ServerDBConst.Cart_COLS.Amount, "100");
+
+        items.add(item1);
+        return items;
+    }
+
+
+    // Stubs for Login and Signup
+    public synchronized String getEncryptedPassword(String userName)
+    {
+        return "dyzad";
+    }
+
+    public synchronized boolean doesUserExist(String userName)
+    {
+        if(userName.equals("user"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    // done
+    public synchronized void addUser(String userName, String Password , String email , String phoneNumber)
+    {
+
+    }
+          
              
 }
