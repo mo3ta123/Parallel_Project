@@ -232,5 +232,48 @@ public class Service
         }
 
     }
+    
+    public void editItemAtCart()
+    {
+        try {
+            // Read user name and password
+            String userName = dis.readUTF();
+            String itemID = dis.readUTF();
+            String strQuantity = dis.readUTF();
+
+            int quantity = Integer.valueOf(strQuantity);
+            int intItemID = Integer.valueOf(itemID);
+
+            if(quantity == 0)
+            {
+                DB.removeCartItem(userName, intItemID );
+                dos.writeUTF("AcceptedQuantity");
+            }
+            else if(quantity >= 1)
+            {
+                int itemQuantity = DB.getItemQuantity(intItemID);
+
+                if (itemQuantity >= quantity)
+                {
+                    if(DB.isItemExistsInCart(userName, intItemID))
+                    {
+                        DB.updateCartQuantity(userName, intItemID , quantity);
+                    }
+                    else
+                    {
+                        DB.addItemInCart(userName, intItemID , quantity);
+                    }
+                    dos.writeUTF("AcceptedQuantity");
+                }
+                else
+                {
+                    dos.writeUTF("RejectedQuantity");
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
